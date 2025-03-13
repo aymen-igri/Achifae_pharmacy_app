@@ -6,7 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+
 import java.io.IOException;
+
+import com.example.DB.models.Client;
+import com.example.DB.models.Medicaments;
+import com.example.DB.models.Ordonnances;
+
 
 /**
  * JavaFX App
@@ -32,7 +39,9 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+         Ordonnances o = new Ordonnances(1, 1, 1, "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_CASPIAN", "STYLESHEET_MODENA", "STYLESHEET_CASPIAN");
+         String URL = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
+         o.insert(URL);
     }
 
 }
