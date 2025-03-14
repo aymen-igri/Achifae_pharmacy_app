@@ -3,6 +3,7 @@ package com.example.DB.models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Pharmacien extends Utilisateur implements Operations{
@@ -12,8 +13,8 @@ public class Pharmacien extends Utilisateur implements Operations{
     private String role_ph;
 
     // Constructor
-    public Pharmacien(int id, String name, String gender, String contact, String username, String password, String role) {
-        super(id, name, gender);
+    public Pharmacien(String name, String gender, String contact, String username, String password, String role) {
+        super(name, gender);
         this.contact_ph = contact;
         this.username_ph = username;
         this.password_ph = password;
@@ -65,4 +66,30 @@ public class Pharmacien extends Utilisateur implements Operations{
         }
     }
 
+    public boolean exist(String URL){
+        String sql = "SELECT * FROM Pharmacien WHERE username_ph=? AND password_ph=?";
+        boolean userExists = false;
+    
+        try (Connection conn = DriverManager.getConnection(URL);
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+            pstmt.setString(1, username_ph);
+            pstmt.setString(2, password_ph);
+        
+            try (ResultSet rs = pstmt.executeQuery()) {
+            // If the result set has at least one row, the user exists
+                userExists = rs.next();
+            
+                if (userExists) {
+                    System.out.println("Login successful!");
+                } else {
+                    System.out.println("Invalid username or password.");
+                }
+            }   
+        }catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+        }
+    
+        return userExists;
+    }
 }

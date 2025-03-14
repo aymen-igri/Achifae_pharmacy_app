@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="633.0" style="-fx-background-color: #025159;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SignIn">
+   <children>
+      <AnchorPane layoutX="103.0" layoutY="242.0" prefHeight="216.0" prefWidth="427.0" style="-fx-background-color: #009099; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);">
+         <children>
+            <TextField fx:id="username" layoutX="28.0" layoutY="59.0" prefHeight="25.0" prefWidth="377.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <TextField fx:id="password" layoutX="28.0" layoutY="105.0" prefHeight="25.0" prefWidth="377.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="156.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se connecter" wrappingWidth="115.0924072265625">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="contibutton" layoutX="216.0" layoutY="154.0" mnemonicParsing="false" onAction="#valider" prefHeight="33.0" prefWidth="109.0" style="-fx-background-color: #05F29B; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="Valider" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="signup" layoutX="101.0" layoutY="154.0" mnemonicParsing="false" onAction="#inscription" prefHeight="33.0" prefWidth="109.0" style="-fx-background-color: #0D0D0D; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="S'inscrire" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="28.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de pharmacien" />
+            <Text fill="WHITE" layoutX="28.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="180.0" fitWidth="270.0" layoutX="213.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/oooo-removebg-preview%20(2).png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

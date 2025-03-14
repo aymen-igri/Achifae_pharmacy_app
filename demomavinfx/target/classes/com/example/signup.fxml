@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="687.0" style="-fx-background-color: #025159;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SignUp">
+   <children>
+      <AnchorPane layoutX="42.0" layoutY="23.0" prefHeight="378.0" prefWidth="367.0" style="-fx-background-color: #009099; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);">
+         <children>
+            <TextField fx:id="nomph" layoutX="25.0" layoutY="59.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="144.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'inscrire" wrappingWidth="78.42576599121094">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Button fx:id="create" layoutX="208.0" layoutY="317.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #05F29B; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="S'inscrire" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="retour" layoutX="44.0" layoutY="317.0" mnemonicParsing="false" onAction="#connection" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #0D0D0D; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="j'ai un compte" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="25.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de pharmacien:" />
+            <Text fill="WHITE" layoutX="25.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" />
+            <TextField fx:id="tele" layoutX="25.0" layoutY="144.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="25.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de telephone" />
+            <TextField fx:id="username" layoutX="25.0" layoutY="228.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="25.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur" />
+            <TextField fx:id="password" layoutX="25.0" layoutY="270.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="25.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" />
+            <TextField fx:id="role" layoutX="25.0" layoutY="186.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <Text fill="WHITE" layoutX="25.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le role du pharmacien" />
+            <TextField fx:id="gender" layoutX="25.0" layoutY="101.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="180.0" fitWidth="222.0" layoutX="442.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@icons/oooo-removebg-preview%20(2).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

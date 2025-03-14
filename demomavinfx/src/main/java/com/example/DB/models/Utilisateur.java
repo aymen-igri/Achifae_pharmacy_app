@@ -6,8 +6,7 @@ public class Utilisateur {
     private String gender;
 
     // Constructeur
-    public Utilisateur(int id,String name,String gender){
-        this.id=id;
+    public Utilisateur(String name,String gender){
         this.name=name;
         this.gender=gender;
     }

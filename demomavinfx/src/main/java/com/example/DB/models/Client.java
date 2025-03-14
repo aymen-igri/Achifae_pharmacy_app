@@ -13,8 +13,8 @@ public class Client extends Utilisateur implements Operations{
     private String address_cli;
 
     // Constructeur
-    public Client(int id, String name, String gender, int phoneNumber, String email, String address) {
-        super(id, name, gender);
+    public Client(String name, String gender, int phoneNumber, String email, String address) {
+        super(name, gender);
         this.phoneNumber_cli = phoneNumber;
         this.email_cli = email;
         this.address_cli = address;
