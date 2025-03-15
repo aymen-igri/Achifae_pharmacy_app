@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Parametres">
+   <top>
+      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
+               <children>
+                  <ImageView fitHeight="91.0" fitWidth="116.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/oooo-removebg-preview%20(2).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Line endX="182.1666259765625" endY="0.6666793823242188" layoutX="1086.0" layoutY="71.0" startX="191.5" startY="-70.0" stroke="WHITE" />
+            <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
+            <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EDF0F4;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0">
+               <children>
+                  <AnchorPane layoutX="-48.0" layoutY="3.0" prefHeight="45.0" prefWidth="176.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="569.0" prefWidth="178.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutY="14.0" prefHeight="65.0" prefWidth="176.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/940-9406687_already-a-proact-user-employee-icon-white-png.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="73.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nom:" />
+                  <Text fill="WHITE" layoutX="73.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="role:" />
+               </children>
+            </AnchorPane>
+            <Line endX="54.5" endY="-9.333251953125" layoutX="102.0" layoutY="573.0" startX="-100.0" />
+            <Button layoutY="124.0" mnemonicParsing="false" onAction="#openMed" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <Button layoutX="-2.0" layoutY="170.0" mnemonicParsing="false" onAction="#openCli" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <ImageView fitHeight="30.0" fitWidth="21.0" layoutX="5.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/940-9406687_already-a-proact-user-employee-icon-white-png.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clients " />
+            <Button layoutY="216.0" mnemonicParsing="false" onAction="#openOrd" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="5.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/3143232-ufGL1kaOVm-high_0002-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordonnances" />
+            <Button layoutX="-1.0" layoutY="261.0" mnemonicParsing="false" onAction="#openVen" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <ImageView fitHeight="32.0" fitWidth="23.0" layoutX="5.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/sales-performance.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ventes" />
+            <Button layoutX="-1.0" layoutY="306.0" mnemonicParsing="false" onAction="#openRea" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="5.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/istockphoto-1298704409-170x170-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réapprovisionnements" />
+            <Button layoutX="-2.0" layoutY="351.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #04D9B2;" />
+            <ImageView fitHeight="29.0" fitWidth="24.0" layoutX="5.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/settings.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parametres" />
+            <Button layoutY="79.0" mnemonicParsing="false" onAction="#openTab" prefHeight="45.0" prefWidth="178.0" style="-fx-background-color: #025159;" />
+            <ImageView fitHeight="24.0" fitWidth="30.0" layoutX="5.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/dashboard-icon-set-in-solid-black-and-white-color-vector-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tableau de bord" />
+            <ImageView fitHeight="28.0" fitWidth="24.0" layoutX="5.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/images-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Médicaments" wrappingWidth="92.15360260009766" />
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

@@ -58,7 +58,7 @@ public class SignIn {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/signin.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("page de connection");
+        stage.setTitle("Connection");
         stage.getIcons().add(icon);
         stage.setResizable(false);
         stage.show();
@@ -69,12 +69,12 @@ public class SignIn {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("page d'inscription");
+        stage.setTitle("Inscription");
         stage.setResizable(false);
         stage.show();
     }
 
-    public void valider(){
+    public void valider(ActionEvent event){
        try{
             if(username.getText().isEmpty()||password.getText().isEmpty()){
                 showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","Veuillez remplir tous les champs.");
@@ -88,6 +88,8 @@ public class SignIn {
 
             if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")){
                 showAlert(AlertType.INFORMATION, "Inscription réussie", "Pharmacien existe", "BIENVENUE");
+                Tableaudeboard t = new Tableaudeboard();
+                t.openpageT(event);
             }else{
                 showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","nome d'utilisateur ou le mot de pass est faut.");
             }
