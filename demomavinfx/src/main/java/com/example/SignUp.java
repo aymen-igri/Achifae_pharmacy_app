@@ -61,6 +61,7 @@ public class SignUp {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.centerOnScreen();
         stage.show();
     }
 

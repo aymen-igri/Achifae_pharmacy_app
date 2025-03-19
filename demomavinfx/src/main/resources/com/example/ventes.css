@@ -1,0 +1,12 @@
+.tab , .med , .ord , .rea, .cli, .par{ 
+    -fx-background-color: #025159;
+}
+
+.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover , .med:hover{
+    -fx-background-color: #04D9B2;
+    -fx-cursor: hand;
+}
+
+.ven{
+    -fx-background-color: #04D9B2;
+}

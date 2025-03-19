@@ -77,7 +77,7 @@ public class Pharmacien extends Utilisateur implements Operations{
             pstmt.setString(2, password_ph);
         
             try (ResultSet rs = pstmt.executeQuery()) {
-            // If the result set has at least one row, the user exists
+
                 userExists = rs.next();
             
                 if (userExists) {
@@ -89,7 +89,38 @@ public class Pharmacien extends Utilisateur implements Operations{
         }catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }
-    
         return userExists;
+    }
+
+    public Pharmacien getByUserPass(String URL){
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try{
+                conn = DriverManager.getConnection(URL);
+                String sql = "SELECT * FROM Pharmacien WHERE username_ph=? AND password_ph=?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, this.username_ph);
+                stmt.setString(2, this.password_ph);
+                rs = stmt.executeQuery();
+                if (rs.next()) {
+                    // Create and return a new Pharmacien object with all the data
+                    Pharmacien pharmacien = new Pharmacien(
+                        rs.getString("nom_ph"),
+                        rs.getString("sexe_ph"),
+                        rs.getString("cont_ph"),
+                        rs.getString("username_ph"),
+                        rs.getString("password_ph"),
+                        rs.getString("role_ph")
+                    );
+                    return pharmacien;
+                }
+                return null;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

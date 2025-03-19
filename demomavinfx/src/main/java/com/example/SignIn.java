@@ -47,7 +47,7 @@ public class SignIn {
 
 
     public SignIn() {
-        InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/oooo-removebg-preview (2).png");
+        InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/icon4.png");
         if (iconStream == null) {
             throw new IllegalArgumentException("Icon image not found");
         }
@@ -61,6 +61,7 @@ public class SignIn {
         stage.setTitle("Connection");
         stage.getIcons().add(icon);
         stage.setResizable(false);
+        stage.centerOnScreen();
         stage.show();
     }
     
@@ -71,6 +72,7 @@ public class SignIn {
         stage.setScene(scene);
         stage.setTitle("Inscription");
         stage.setResizable(false);
+        stage.centerOnScreen();
         stage.show();
     }
 
@@ -87,8 +89,11 @@ public class SignIn {
             ph.setPassword(passwordValue);
 
             if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")){
-                showAlert(AlertType.INFORMATION, "Inscription réussie", "Pharmacien existe", "BIENVENUE");
-                Tableaudeboard t = new Tableaudeboard();
+                Pharmacien ph2;
+                ph2=ph.getByUserPass("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
+                Tableaudeboard t = new Tableaudeboard(ph2.getName(),ph2.getRole());
+                System.out.println(ph2.getName());
+                System.out.println(ph2.getRole());
                 t.openpageT(event);
             }else{
                 showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","nome d'utilisateur ou le mot de pass est faut.");

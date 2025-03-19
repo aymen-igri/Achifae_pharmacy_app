@@ -1,0 +1,12 @@
+.ord , .med , .ven , .rea , .par , .cli ,.logout{ 
+    -fx-background-color: #025159;
+}
+
+.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover , .med:hover , .logout:hover{
+    -fx-background-color: #04D9B2;
+    -fx-cursor: hand;
+}
+
+.tab{
+    -fx-background-color: #04D9B2;
+}
