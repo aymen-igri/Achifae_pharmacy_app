@@ -20,7 +20,7 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <Button fx:id="contibutton" layoutX="216.0" layoutY="154.0" mnemonicParsing="false" onAction="#valider" prefHeight="33.0" prefWidth="109.0" style="-fx-background-color: #05F29B; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="Valider" textAlignment="CENTER">
+            <Button fx:id="contibutton" layoutX="216.0" layoutY="154.0" mnemonicParsing="false" onAction="#valider" prefHeight="33.0" prefWidth="109.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="Valider" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>

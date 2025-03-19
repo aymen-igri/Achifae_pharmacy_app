@@ -13,8 +13,8 @@ public class Pharmacien extends Utilisateur implements Operations{
     private String role_ph;
 
     // Constructor
-    public Pharmacien(String name, String gender, String contact, String username, String password, String role) {
-        super(name, gender);
+    public Pharmacien(String name,String lastn , String gender, String contact, String username, String password, String role) {
+        super(name,lastn, gender);
         this.contact_ph = contact;
         this.username_ph = username;
         this.password_ph = password;
@@ -24,6 +24,7 @@ public class Pharmacien extends Utilisateur implements Operations{
     // Getters
     public int getId() {return super.getId();}
     public String getName() {return super.getName();}
+    public String getLastN() {return super.getLastN();}
     public String getGender() {return super.getGender();}
     public String getContact() {return contact_ph;}
     public String getUsername() {return username_ph;}
@@ -33,6 +34,7 @@ public class Pharmacien extends Utilisateur implements Operations{
     // Setters
     public void setId(int id) {super.setId(id);}
     public void setName(String name) {super.setName(name);}
+    public void setLastN(String lastn) {super.setLastN(lastn);}
     public void setGender(String gender) {super.setGender(gender);}
     public void setContact(String contact) {this.contact_ph = contact;}
     public void setUsername(String username) {this.username_ph = username;}
@@ -41,30 +43,32 @@ public class Pharmacien extends Utilisateur implements Operations{
 
     @Override
     public String toString() {
-        return "Pharmacien{"+"id="+getId()+", name='"+getName()+'\''+", gender='"+getGender()+'\''+", contact='"+contact_ph+'\''+", username='"+username_ph+'\''+", password='"+password_ph+'\''+", role='"+role_ph+'\''+'}';
+        return "Pharmacien{"+"id="+getId()+", name='"+getName()+", pren='"+getLastN()+'\''+", gender='"+getGender()+'\''+", contact='"+contact_ph+'\''+", username='"+username_ph+'\''+", password='"+password_ph+'\''+", role='"+role_ph+'\''+'}';
     }
 
     @Override
     public void insert(String URL){
-        String sql = "INSERT INTO Pharmacien(id_ph, nom_ph, sexe_ph, cont_ph, username_ph, password_ph, role_ph) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pharmacien(nom_ph, pren_ph, sexe_ph, cont_ph, username_ph, password_ph, role_ph) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(2,getName());
-            pstmt.setString(3,getGender());
-            pstmt.setString(4,getContact());
-            pstmt.setString(5,getUsername());
-            pstmt.setString(6,getPassword());
-            pstmt.setString(7,getRole());
+            pstmt.setString(1, getName());
+        pstmt.setString(2, getLastN());
+        pstmt.setString(3, getGender());
+        pstmt.setString(4, getContact());
+        pstmt.setString(5, getUsername());
+        pstmt.setString(6, getPassword());
+        pstmt.setString(7, getRole());
 
-            pstmt.executeUpdate();
-            System.out.println("Pharmacien inserted successfully!");
+        pstmt.executeUpdate();
+        System.out.println("Pharmacien inserted successfully!");
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    } catch (SQLException e) {
+        System.out.println("Database error: " + e.getMessage());
+        e.printStackTrace();
     }
+}
 
     public boolean exist(String URL){
         String sql = "SELECT * FROM Pharmacien WHERE username_ph=? AND password_ph=?";
@@ -109,6 +113,7 @@ public class Pharmacien extends Utilisateur implements Operations{
                     // Create and return a new Pharmacien object with all the data
                     Pharmacien pharmacien = new Pharmacien(
                         rs.getString("nom_ph"),
+                        rs.getString("pren_ph"),
                         rs.getString("sexe_ph"),
                         rs.getString("cont_ph"),
                         rs.getString("username_ph"),

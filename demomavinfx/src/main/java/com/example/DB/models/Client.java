@@ -13,8 +13,8 @@ public class Client extends Utilisateur implements Operations{
     private String address_cli;
 
     // Constructeur
-    public Client(String name, String gender, int phoneNumber, String email, String address) {
-        super(name, gender);
+    public Client(String name,String lastn, String gender, int phoneNumber, String email, String address) {
+        super(name,lastn, gender);
         this.phoneNumber_cli = phoneNumber;
         this.email_cli = email;
         this.address_cli = address;
@@ -23,6 +23,7 @@ public class Client extends Utilisateur implements Operations{
     // Getters 
     public int getId(){return super.getId();}
     public String getName() {return super.getName();}
+    public String getLastN() {return super.getLastN();}
     public String getGender() {return super.getGender();}
     public int getPhoneNumber() {return phoneNumber_cli;}
     public String getEmail() {return email_cli;}
@@ -31,6 +32,7 @@ public class Client extends Utilisateur implements Operations{
     //Setters
     public void setId(int id){super.setId(id);}
     public void setName(String name) {super.setName(name);}
+    public void setLastN(String lastn) {super.setLastN(lastn);}
     public void setGender(String gender) {super.setGender(gender);}
     public void setPhoneNumber(int phoneNumber) {this.phoneNumber_cli = phoneNumber;}
     public void setEmail(String email) {this.email_cli = email;}

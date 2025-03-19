@@ -27,6 +27,7 @@ public class SignUp {
     private SignIn signIn;
 
     private String nameValue;
+    private String lastnValue;
     private String genderValue;
     private String contValue;
     private String roleValue;
@@ -39,6 +40,8 @@ public class SignUp {
 
     @FXML
     private TextField nomph;
+    @FXML
+    private TextField prenph;
     @FXML
     private TextField gender;
     @FXML
@@ -68,18 +71,19 @@ public class SignUp {
 
     public void inscrire(){
         try{
-            if(nomph.getText().isEmpty()||gender.getText().isEmpty()||tele.getText().isEmpty()||role.getText().isEmpty()||username.getText().isEmpty()||password.getText().isEmpty()){
+            if(nomph.getText().isEmpty()||prenph.getText().isEmpty()||gender.getText().isEmpty()||tele.getText().isEmpty()||role.getText().isEmpty()||username.getText().isEmpty()||password.getText().isEmpty()){
                 showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","Veuillez remplir tous les champs.");
                 return;
             }
             nameValue=nomph.getText();
+            lastnValue=prenph.getText();
             genderValue=gender.getText();
             contValue=tele.getText();
             roleValue=role.getText();
             usernameValue=username.getText();
             passwordValue=password.getText();
 
-            pharmacien = new Pharmacien(nameValue, genderValue, contValue, usernameValue, passwordValue, roleValue);
+            pharmacien = new Pharmacien(nameValue,lastnValue, genderValue, contValue, usernameValue, passwordValue, roleValue);
             pharmacien.insert("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
 
             showAlert(AlertType.INFORMATION, "Inscription réussie", "Utilisateur créé avec succès", "vous devez maintenant se conecter avec ces information");

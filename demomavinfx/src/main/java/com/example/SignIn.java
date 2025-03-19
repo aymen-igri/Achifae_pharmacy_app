@@ -29,7 +29,7 @@ public class SignIn {
     private String usernameValue;
     private String passwordValue;
 
-    Pharmacien ph = new Pharmacien("usernameValue", "passwordValue", "passwordValue", "usernameValue", "passwordValue", "passwordValue") ;
+    Pharmacien ph = new Pharmacien("usernameValue","","passwordValue", "passwordValue", "usernameValue", "passwordValue", "passwordValue") ;
 
     
 
@@ -85,13 +85,12 @@ public class SignIn {
             usernameValue=username.getText();
             passwordValue=password.getText();
 
-            ph.setUsername(usernameValue);
-            ph.setPassword(passwordValue);
+            Pharmacien ph = new Pharmacien("", "", "", "", usernameValue, passwordValue, "");
 
             if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")){
                 Pharmacien ph2;
                 ph2=ph.getByUserPass("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
-                Tableaudeboard t = new Tableaudeboard(ph2.getName(),ph2.getRole());
+                Tableaudeboard t = new Tableaudeboard(ph2.getLastN(),ph2.getRole());
                 System.out.println(ph2.getName());
                 System.out.println(ph2.getRole());
                 t.openpageT(event);
