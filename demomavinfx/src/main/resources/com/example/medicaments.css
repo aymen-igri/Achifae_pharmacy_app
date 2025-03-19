@@ -1,8 +1,8 @@
-.tab , .cli , .ord , .ven , .rea , .par{ 
+.tab , .cli , .ord , .ven , .rea , .par ,.logout{ 
     -fx-background-color: #025159;
 }
 
-.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover {
+.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover ,.logout:hover{
     -fx-background-color: #04D9B2;
     -fx-cursor: hand;
 }

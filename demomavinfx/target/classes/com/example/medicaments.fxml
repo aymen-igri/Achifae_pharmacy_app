@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" stylesheets="@medicaments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
          
          <children>
             <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
@@ -30,13 +30,10 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EDF0F4;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0">
-               <children>
-                  <AnchorPane layoutX="-48.0" layoutY="3.0" prefHeight="45.0" prefWidth="176.0" />
-               </children>
-            </AnchorPane>
+            <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0" />
+            <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="-48.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </center>
@@ -53,7 +50,7 @@
                   <Label fx:id="role" layoutX="67.0" layoutY="33.0" text="role" textFill="WHITE" />
                </children>
             </AnchorPane>
-            <Button layoutY="125.0" mnemonicParsing="false" onAction="#openpageM" prefHeight="45.0" prefWidth="178.0" styleClass="med" />
+            <Button layoutY="125.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" styleClass="med" />
             <ImageView fitHeight="28.0" fitWidth="24.0" layoutX="5.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/images-removebg-preview.png" />
@@ -103,6 +100,13 @@
             </ImageView>
             <Text fill="WHITE" layoutX="35.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tableau de bord" />
             <Label fx:id="name" layoutX="67.0" layoutY="12.0" text="Label" textFill="WHITE" />
+            <Button layoutY="531.0" mnemonicParsing="false" onAction="#logOut" prefHeight="45.0" prefWidth="178.0" styleClass="logout" />
+            <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="5.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/logout-icon-256x256-5c0ge4jd.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="35.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se déconnecter" />
          </children>
       </AnchorPane>
    </left>

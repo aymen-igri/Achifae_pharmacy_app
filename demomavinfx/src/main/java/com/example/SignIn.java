@@ -13,13 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-
-
-
 
 public class SignIn {
 
@@ -29,22 +27,25 @@ public class SignIn {
     private String usernameValue;
     private String passwordValue;
 
-    Pharmacien ph = new Pharmacien("usernameValue","","passwordValue", "passwordValue", "usernameValue", "passwordValue", "passwordValue") ;
-
-    
+    Pharmacien ph = new Pharmacien("usernameValue","","passwordValue", "passwordValue", "usernameValue", "passwordValue", "passwordValue");
 
     @FXML
     private TextField username;
 
     @FXML
-    private TextField password;
+    private PasswordField passwordField;
+    
+    @FXML
+    private TextField passwordVisible;
+    
+    @FXML
+    private Button togglePassword;
     
     @FXML
     private Button contibutton;
 
     @FXML
     private Button signup;
-
 
     public SignIn() {
         InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/icon4.png");
@@ -54,7 +55,7 @@ public class SignIn {
         icon = new Image(iconStream);
     }
 
-    public void firstpage(Stage stage)throws IOException{
+    public void firstpage(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/signin.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -65,7 +66,7 @@ public class SignIn {
         stage.show();
     }
     
-    public void inscription(ActionEvent e)throws IOException{
+    public void inscription(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/signup.fxml"));
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -75,33 +76,53 @@ public class SignIn {
         stage.centerOnScreen();
         stage.show();
     }
+    
+    @FXML
+    public void togglePasswordVisibility(ActionEvent event) {
+        if (passwordField.isVisible()) {
+            // Transfer text from password field to visible field
+            passwordVisible.setText(passwordField.getText());
+            passwordField.setVisible(false);
+            passwordVisible.setVisible(true);
+            togglePassword.setText("🔒");
+        } else {
+            // Transfer text from visible field to password field
+            passwordField.setText(passwordVisible.getText());
+            passwordField.setVisible(true);
+            passwordVisible.setVisible(false);
+            togglePassword.setText("👁");
+        }
+    }
 
-    public void valider(ActionEvent event){
-       try{
-            if(username.getText().isEmpty()||password.getText().isEmpty()){
-                showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","Veuillez remplir tous les champs.");
+    public void valider(ActionEvent event) {
+        try {
+            String passwordText = passwordField.isVisible() ? passwordField.getText() : passwordVisible.getText();
+            
+            if (username.getText().isEmpty() || passwordText.isEmpty()) {
+                showAlert(AlertType.ERROR, "Erreur de saisie", "Champs vides", "Veuillez remplir tous les champs.");
                 return;
             }
-            usernameValue=username.getText();
-            passwordValue=password.getText();
+            
+            usernameValue = username.getText();
+            passwordValue = passwordText;
 
             Pharmacien ph = new Pharmacien("", "", "", "", usernameValue, passwordValue, "");
 
-            if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")){
+            if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")) {
                 Pharmacien ph2;
-                ph2=ph.getByUserPass("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
-                Tableaudeboard t = new Tableaudeboard(ph2.getLastN(),ph2.getRole());
+                ph2 = ph.getByUserPass("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
+                Tableaudeboard t = new Tableaudeboard(ph2.getLastN(), ph2.getRole());
                 System.out.println(ph2.getName());
                 System.out.println(ph2.getRole());
                 t.openpageT(event);
-            }else{
-                showAlert(AlertType.ERROR, "Erreur de saisie","Champs vides","nome d'utilisateur ou le mot de pass est faut.");
+            } else {
+                showAlert(AlertType.ERROR, "Erreur de saisie", "Champs vides", "nom d'utilisateur ou le mot de passe est faux.");
             }
-       }catch(Exception e){
+        } catch (Exception e) {
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
             e.printStackTrace();
-       }
+        }
     }
 
     private void showAlert(AlertType alertType, String title, String header, String content) {

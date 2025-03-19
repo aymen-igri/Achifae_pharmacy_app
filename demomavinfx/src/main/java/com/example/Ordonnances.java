@@ -81,6 +81,23 @@ public class Ordonnances {
         p.openpageP(event);
     }
 
+    public void logOut(ActionEvent event)throws Exception{
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/signin.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setFullScreenExitHint("");
+            stage.setTitle("Connection");
+            stage.centerOnScreen();
+            stage.show();
+        }catch(Exception e){
+            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
     private void showAlert(AlertType alertType, String title, String header, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
