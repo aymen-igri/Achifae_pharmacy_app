@@ -22,13 +22,20 @@ import javafx.scene.control.Label;
 
 // for the graph
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Tableaudeboard {
 
@@ -72,6 +79,15 @@ public class Tableaudeboard {
     @FXML
     private NumberAxis yAxis;
 
+    @FXML
+    private BarChart<String, Number> barChart;
+
+    @FXML
+    private CategoryAxis barXAxis;
+
+    @FXML
+    private NumberAxis barYAxis;
+
     public Tableaudeboard(Pharmacien ph){
         this.ph = ph;
         this.med = new Medicament();
@@ -98,7 +114,10 @@ public class Tableaudeboard {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+
+            //the graphs functions
             loadChartData();
+            loadBarChartData();
 
             stage.setFullScreenExitHint("");
             stage.setTitle("Tabeau de board");
@@ -145,6 +164,9 @@ public class Tableaudeboard {
             // Set chart title and axis labels
             xAxis.setLabel("Mois");
             yAxis.setLabel("Valeur");
+            yAxis.setTickLabelsVisible(true);
+            yAxis.setTickMarkVisible(true);
+            yAxis.setAnimated(false);
             
             // Close resources
             rsVentes.close();
@@ -157,6 +179,74 @@ public class Tableaudeboard {
         }
     }
 
+    private void loadBarChartData() {
+        try {
+            // Clear any existing data
+            barChart.getData().clear();
+            
+            // Create a series for the data
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Médicaments les plus vendus");
+            
+            // Connect to the database
+            Connection conn = DriverManager.getConnection(URL);
+            Statement stmt = conn.createStatement();
+            
+            // Query for top 5 most sold medications
+            String query = "SELECT " +
+                          "m.nom_med AS nom, " +
+                          "SUM(v.quantité_v) AS total_sold " +
+                          "FROM Ventes v " +
+                          "JOIN Medicaments m ON v.id_med = m.id_med " +
+                          "GROUP BY m.nom_med " +
+                          "ORDER BY total_sold DESC " +
+                          "LIMIT 5";
+            
+            ResultSet rs = stmt.executeQuery(query);
+            
+            // Add data points to the series
+            while (rs.next()) {
+                String medicationName = rs.getString("nom");
+                int quantitySold = rs.getInt("total_sold");
+                series.getData().add(new XYChart.Data<>(medicationName, quantitySold));
+            }
+            
+            // Add the series to the chart
+            barChart.getData().add(series);
+            
+            // Set chart title and axis labels
+            barChart.setTitle("Top 5 Médicaments les plus vendus");
+            barXAxis.setLabel("Médicament");
+            barYAxis.setLabel("Quantité vendue");
+            // After adding data to the chart
+            barXAxis.setTickLabelsVisible(true);
+            barXAxis.setTickMarkVisible(true);
+            barXAxis.setAnimated(false);
+             // Prevent automatic label skipping
+            
+            // Apply custom styling to bars
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                    if (newNode != null) {
+                        // Add tooltip
+                        javafx.scene.control.Tooltip tooltip = new javafx.scene.control.Tooltip(
+                            data.getXValue() + ": " + data.getYValue() + " unités"
+                        );
+                        javafx.scene.control.Tooltip.install(newNode, tooltip);
+                    }
+                });
+            }
+            
+            // Close resources
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Erreur", "Erreur lors du chargement des données du graphique à barres", 
+                     "Détails: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     public void openMed(ActionEvent event ){
         Medicaments m = new Medicaments(ph);
         m.openpageM(event);
