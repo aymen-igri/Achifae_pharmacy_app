@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Ordonnances implements Operations{
+public class Ordonnance implements Operations{
     private int id_ord;
     private int clientId_ord;
     private int medicamentId_ord;
@@ -17,8 +17,7 @@ public class Ordonnances implements Operations{
     private String status_ord;
 
     // Constructor
-    public Ordonnances(int id, int clientId, int medicamentId, String doctorName, String doctorContact, String date, String expirationDate, String status) {
-        this.id_ord = id;
+    public Ordonnance(int clientId, int medicamentId, String doctorName, String doctorContact, String date, String expirationDate, String status) {
         this.clientId_ord = clientId;
         this.medicamentId_ord = medicamentId;
         this.doctorName_ord = doctorName;
@@ -79,5 +78,22 @@ public class Ordonnances implements Operations{
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public int count(String URL){
+        String sql="SELECT COUNT(id_ord) FROM Ordonnances";
+
+        int count = 0;
+        try(Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            java.sql.ResultSet rs = pstmt.executeQuery()){
+               if (rs.next()){
+                count=rs.getInt(1);
+               }
+            }catch(Exception e){
+               System.out.println("error:"+e.getMessage());
+            }
+        return count;
     }
 }

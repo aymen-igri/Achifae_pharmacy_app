@@ -111,9 +111,7 @@ public class SignIn {
             if (ph.exist("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db")) {
                 Pharmacien ph2;
                 ph2 = ph.getByUserPass("jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db");
-                Tableaudeboard t = new Tableaudeboard(ph2.getLastN(), ph2.getRole());
-                System.out.println(ph2.getName());
-                System.out.println(ph2.getRole());
+                Tableaudeboard t = new Tableaudeboard(ph2);
                 t.openpageT(event);
             } else {
                 showAlert(AlertType.ERROR, "Erreur de saisie", "Champs vides", "nom d'utilisateur ou le mot de passe est faux.");

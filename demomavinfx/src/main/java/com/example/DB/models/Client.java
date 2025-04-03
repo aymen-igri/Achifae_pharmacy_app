@@ -20,6 +20,13 @@ public class Client extends Utilisateur implements Operations{
         this.address_cli = address;
     }
 
+    public Client() {
+        super("","","");
+        this.phoneNumber_cli =0;
+        this.email_cli = "";
+        this.address_cli = "";
+    }
+
     // Getters 
     public int getId(){return super.getId();}
     public String getName() {return super.getName();}
@@ -65,5 +72,22 @@ public class Client extends Utilisateur implements Operations{
             System.out.println(e.getMessage());
               // Re-throwing the exception to handle it at a higher level if needed
         }
+    }
+
+    @Override
+    public int count(String URL){
+        String sql="SELECT COUNT(id_cli) FROM Clients";
+
+        int count = 0;
+        try(Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            java.sql.ResultSet rs = pstmt.executeQuery()){
+               if (rs.next()){
+                count=rs.getInt(1);
+               }
+            }catch(Exception e){
+               System.out.println("error:"+e.getMessage());
+            }
+        return count;
     }
 }

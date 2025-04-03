@@ -21,6 +21,14 @@ public class Pharmacien extends Utilisateur implements Operations{
         this.role_ph = role;
     }
 
+    public Pharmacien() {
+        super("","", "");
+        this.contact_ph = "";
+        this.username_ph = "";
+        this.password_ph = "";
+        this.role_ph = "";
+    }
+
     // Getters
     public int getId() {return super.getId();}
     public String getName() {return super.getName();}
@@ -127,5 +135,22 @@ public class Pharmacien extends Utilisateur implements Operations{
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public int count(String URL){
+        String sql="SELECT COUNT(id_ph) FROM Pharmacien";
+
+        int count = 0;
+        try(Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            java.sql.ResultSet rs = pstmt.executeQuery()){
+               if (rs.next()){
+                count=rs.getInt(1);
+               }
+            }catch(Exception e){
+               System.out.println("error:"+e.getMessage());
+            }
+        return count;
     }
 }

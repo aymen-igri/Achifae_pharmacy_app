@@ -2,6 +2,13 @@ package com.example;
 
 
 
+import com.example.DB.models.Client;
+import com.example.DB.models.Medicament;
+import com.example.DB.models.Pharmacien;
+import com.example.DB.models.Vente;
+import com.example.DB.models.Réapprovisionnement;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,17 +17,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
-
+// for the graph
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Tableaudeboard {
 
-    private Stage stage = new Stage();
-    private String Nom ;
-    private String Role ;
+    private Pharmacien ph;
+    private Medicament med;
+    private Client cli;
+    private Vente ven;
+    private Réapprovisionnement rea;
+
+    
+    private String URL = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
 
     @FXML
     private Label name;
@@ -31,7 +50,35 @@ public class Tableaudeboard {
     @FXML
     private Label bienvenue;
 
-    public Tableaudeboard(String Nom ,String Role){this.Nom=Nom;this.Role=Role;}
+    @FXML
+    private Label nbrMed ;
+
+    @FXML 
+    private Label nbrCli;
+
+    @FXML
+    private Label nbrVen;
+
+    @FXML
+    private Label nbrRea;
+
+    //for the graph
+    @FXML
+    private LineChart<String, Number> lineChart;
+
+    @FXML
+    private CategoryAxis xAxis;
+
+    @FXML
+    private NumberAxis yAxis;
+
+    public Tableaudeboard(Pharmacien ph){
+        this.ph = ph;
+        this.med = new Medicament();
+        this.cli = new Client();
+        this.ven = new Vente();
+        this.rea = new Réapprovisionnement();
+    }
     
 
     public void openpageT(ActionEvent event){
@@ -40,14 +87,19 @@ public class Tableaudeboard {
             loader.setController(this);  // Ensure FXML elements are linked
             Parent root = loader.load();
 
-            name.setText("Nom: " + Nom);
-            role.setText("Rôle: " + Role);
-            bienvenue.setText("Bienvenue " + Nom);
+            name.setText("Nom: "+ph.getLastN());
+            role.setText("Rôle: " + ph.getRole());
+            bienvenue.setText("Bienvenue " + ph.getName()+" "+ph.getLastN());
+            nbrMed.setText(String.valueOf(med.count(URL)));
+            nbrCli.setText(String.valueOf(cli.count(URL)));
+            nbrVen.setText(String.valueOf(ven.count(URL)));
+            nbrRea.setText(String.valueOf(rea.count(URL)));
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
-
             stage.setScene(scene);
+            loadChartData();
+
             stage.setFullScreenExitHint("");
             stage.setTitle("Tabeau de board");
             stage.setFullScreen(false);
@@ -60,33 +112,78 @@ public class Tableaudeboard {
         }
     }
 
+    //for the graph
+    private void loadChartData() {
+        try {
+            // Clear any existing data
+            lineChart.getData().clear();
+            
+            // Create a series for sales data
+            XYChart.Series<String, Number> salesSeries = new XYChart.Series<>();
+            salesSeries.setName("Ventes par mois");
+            
+            // Connect to the database
+            Connection conn = DriverManager.getConnection(URL);
+            Statement stmt = conn.createStatement();
+            
+            // Query for monthly sales data
+            String ventesQuery = "SELECT strftime('%m-%Y', date_v) as month , SUM(prix_total_v) AS total" +
+                                 " FROM Ventes GROUP BY month ORDER BY date_v";
+            ResultSet rsVentes = stmt.executeQuery(ventesQuery);
+            
+            // Add data points to the sales series
+            while (rsVentes.next()) {
+                String month = rsVentes.getString("month");
+                double total = rsVentes.getDouble("total");
+                salesSeries.getData().add(new XYChart.Data<>(month, total));
+            }
+            
+            
+            // Add the series to the chart
+            lineChart.getData().addAll(salesSeries);
+            
+            // Set chart title and axis labels
+            xAxis.setLabel("Mois");
+            yAxis.setLabel("Valeur");
+            
+            // Close resources
+            rsVentes.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Erreur", "Erreur lors du chargement des données du graphique", 
+                     "Détails: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void openMed(ActionEvent event ){
-        Medicaments m = new Medicaments(Nom,Role);
+        Medicaments m = new Medicaments(ph);
         m.openpageM(event);
     }
 
     public void openCli(ActionEvent event ){
-        Clients c = new Clients(Nom,Role);
+        Clients c = new Clients(ph);
         c.openpageC(event);
     }
 
     public void openOrd(ActionEvent event){
-        Ordonnances o = new Ordonnances(Nom,Role);
+        Ordonnances o = new Ordonnances(ph);
         o.openpageO(event);
     }
 
     public void openVen(ActionEvent event ){
-        Ventes v = new Ventes(Nom,Role);
+        Ventes v = new Ventes(ph);
         v.openpageV(event);
     }
 
     public void openRea(ActionEvent event){
-        Réapprovisionnements r = new Réapprovisionnements(Nom,Role);
+        Réapprovisionnements r = new Réapprovisionnements(ph);
         r.openpageR(event);
     }
 
     public void openPar(ActionEvent event ){
-        Parametres p = new Parametres(Nom,Role);
+        Parametres p = new Parametres(ph);
         p.openpageP(event);
     }
 

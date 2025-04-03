@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.DB.models.Pharmacien;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +15,7 @@ import javafx.stage.Stage;
 
 public class Ordonnances {
 
-    private String Nom ;
-    private String Role ;
-
+    private Pharmacien ph;
     @FXML
     private Label name;
     
@@ -24,7 +24,7 @@ public class Ordonnances {
 
     
 
-    public Ordonnances(String Nom ,String Role){this.Nom=Nom;this.Role=Role;}
+    public Ordonnances(Pharmacien ph){this.ph=ph;}
 
     public void openpageO(ActionEvent event){
         try{
@@ -32,8 +32,8 @@ public class Ordonnances {
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
-                name.setText("Nom: " + Nom);
-                role.setText("Rôle: " + Role);
+                name.setText("Nom: " + ph.getLastN());
+                role.setText("Rôle: " + ph.getRole());
                 
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -52,32 +52,32 @@ public class Ordonnances {
     }
 
     public void openTab(ActionEvent event){
-        Tableaudeboard t = new Tableaudeboard(Nom,Role);
+        Tableaudeboard t = new Tableaudeboard(ph);
         t.openpageT(event);
     }
 
     public void openMed(ActionEvent event){
-        Medicaments m = new Medicaments(Nom,Role);
+        Medicaments m = new Medicaments(ph);
         m.openpageM(event);
     }
 
     public void openCli(ActionEvent event){
-        Clients c = new Clients(Nom,Role);
+        Clients c = new Clients(ph);
         c.openpageC(event);
     }
 
     public void openVen(ActionEvent event){
-        Ventes v = new Ventes(Nom,Role);
+        Ventes v = new Ventes(ph);
         v.openpageV(event);
     }
 
     public void openRea(ActionEvent event){
-        Réapprovisionnements r = new Réapprovisionnements(Nom,Role);
+        Réapprovisionnements r = new Réapprovisionnements(ph);
         r.openpageR(event);
     }
 
     public void openPar(ActionEvent event){
-        Parametres p = new Parametres(Nom,Role);
+        Parametres p = new Parametres(ph);
         p.openpageP(event);
     }
 

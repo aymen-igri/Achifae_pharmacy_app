@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Medicaments implements Operations {
+public class Medicament implements Operations {
     private int id_med;
     private String name_med;
     private int quantity_med;
@@ -15,14 +15,22 @@ public class Medicaments implements Operations {
     private String type_med;
 
     // Constructeur
-    public Medicaments(int id, String name, int quantity, double price, String expirationDate, String supplier, String type) {
-        this.id_med = id;
+    public Medicament( String name, int quantity, double price, String expirationDate, String supplier, String type) {
         this.name_med = name;
         this.quantity_med = quantity;
         this.price_med = price;
         this.expirationDate_med = expirationDate;
         this.supplier_med = supplier;
         this.type_med = type;
+    }
+
+    public Medicament() {
+        this.name_med = "";
+        this.quantity_med = 0;
+        this.price_med = 0;
+        this.expirationDate_med = "";
+        this.supplier_med = "";
+        this.type_med = "";
     }
 
     // Getters
@@ -67,5 +75,22 @@ public class Medicaments implements Operations {
         } catch (SQLException e) {
             System.out.println(e.getMessage()); // Re-throwing the exception to handle it at a higher level if needed
         }
+    }
+
+    @Override
+    public int count(String URL){
+        String sql="SELECT COUNT(id_med) FROM Medicaments";
+
+        int count = 0;
+        try(Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            java.sql.ResultSet rs = pstmt.executeQuery()){
+               if (rs.next()){
+                count=rs.getInt(1);
+               }
+            }catch(Exception e){
+               System.out.println("error:"+e.getMessage());
+            }
+        return count;
     }
 }

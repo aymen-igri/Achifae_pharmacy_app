@@ -1,13 +1,11 @@
 com\example\Parametres.class
 com\example\Ventes.class
-com\example\DB\models\Medicaments.class
 com\example\Réapprovisionnements.class
 com\example\SignUp.class
 com\example\Ordonnances.class
 com\example\DB\models\Client.class
 module-info.class
 com\example\App.class
-com\example\DB\models\Ordonnances.class
 com\example\PrimaryController.class
 com\example\DB\models\Utilisateur.class
 com\example\DB\models\Operations.class
@@ -16,6 +14,4 @@ com\example\Tableaudeboard.class
 com\example\Clients.class
 com\example\DB\models\Pharmacien.class
 com\example\SecondaryController.class
-com\example\DB\models\Réapprovisionnements.class
-com\example\DB\models\Ventes.class
 com\example\Medicaments.class
