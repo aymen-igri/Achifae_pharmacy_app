@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" stylesheets="@medicaments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="121.0" prefWidth="1274.0" BorderPane.alignment="CENTER">
          
          <children>
             <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
@@ -25,15 +30,67 @@
                </children>
             </AnchorPane>
             <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
-            <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
+            <Label layoutX="228.0" layoutY="7.0" prefHeight="105.0" prefWidth="711.0" text="LIST DES MEDICAMENTS (%d)">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
+            </Label>
+            <Button layoutX="1036.0" layoutY="37.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="193.0" styleClass="add_med_button" text="+ Ajouter un medicament">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0" />
             <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="-48.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" />
+            <TableView layoutX="47.0" layoutY="72.0" prefHeight="431.0" prefWidth="1007.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="250.0" text="NOM" />
+                <TableColumn prefWidth="100.0" text="QUANTITÉ" />
+                <TableColumn prefWidth="75.0" text="PRIX" />
+                <TableColumn prefWidth="150.0" text="DATE D'EXPIRATION" />
+                <TableColumn prefWidth="205.0" text="FOURNICEUR" />
+                <TableColumn prefWidth="150.0" text="TYPE" />
+              </columns>
+            </TableView>
+            <TextField layoutX="47.0" layoutY="17.0" prefHeight="39.0" prefWidth="192.0" promptText="Nom du medicament" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="254.0" layoutY="17.0" prefHeight="39.0" prefWidth="91.0" promptText="Quantité" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="358.0" layoutY="17.0" prefHeight="39.0" prefWidth="104.0" promptText="Prix" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <DatePicker layoutX="471.0" layoutY="17.0" prefHeight="39.0" prefWidth="175.0" promptText="Date d'expiration" styleClass="search_date" />
+            <TextField layoutX="661.0" layoutY="17.0" prefHeight="39.0" prefWidth="169.0" promptText="Forniceur" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <ComboBox layoutX="843.0" layoutY="17.0" prefHeight="39.0" prefWidth="161.0" promptText="Type du medicament" styleClass="search_select" visibleRowCount="2" />
+            <Button layoutX="1014.0" layoutY="17.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="39.0" styleClass="search_button">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="1025.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/search_icon.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>

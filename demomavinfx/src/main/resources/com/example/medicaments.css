@@ -1,12 +1,32 @@
-.tab , .cli , .ord , .ven , .rea , .par ,.logout{ 
+.tab, .cli, .ord, .ven, .rea, .par, .logout { 
     -fx-background-color: #025159;
 }
 
-.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover ,.logout:hover{
+.tab:hover, .cli:hover, .ord:hover, .ven:hover, .rea:hover, .par:hover, .logout:hover, .search_button:hover ,.add_med_button:hover{
     -fx-background-color: #04D9B2;
     -fx-cursor: hand;
 }
 
-.med{
+.med {
     -fx-background-color: #04D9B2;
 }
+
+.search_text, .search_select, .search_button,.search_date ,.add_med_button{
+    -fx-text-fill: white; /* Correct property for text color */
+    -fx-background-color: #025159;
+}
+
+.search_button{
+    -fx-background-radius: 50px;
+}
+
+.search_date .text-field{
+    -fx-text-fill:white;
+    -fx-background-color:#025159;
+}
+
+.search_select .text{
+    -fx-fill: white;
+}
+
+
