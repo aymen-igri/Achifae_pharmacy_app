@@ -30,12 +30,12 @@
                </children>
             </AnchorPane>
             <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
-            <Label layoutX="228.0" layoutY="7.0" prefHeight="105.0" prefWidth="711.0" text="LIST DES MEDICAMENTS (%d)">
+            <Label fx:id="nbrMed" layoutX="228.0" layoutY="7.0" prefHeight="105.0" prefWidth="711.0" text="LIST DES MEDICAMENTS (%d)">
                <font>
                   <Font name="Arial Bold" size="48.0" />
                </font>
             </Label>
-            <Button layoutX="1036.0" layoutY="37.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="193.0" styleClass="add_med_button" text="+ Ajouter un medicament">
+            <Button layoutX="1036.0" layoutY="37.0" mnemonicParsing="false" onAction="#ajouterM" prefHeight="48.0" prefWidth="193.0" styleClass="add_med_button" text="+ Ajouter un medicament">
                <font>
                   <Font size="14.0" />
                </font>
@@ -80,7 +80,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <ComboBox layoutX="843.0" layoutY="17.0" prefHeight="39.0" prefWidth="161.0" promptText="Type du medicament" styleClass="search_select" visibleRowCount="2" />
+            <ComboBox fx:id="typeComboBox" layoutX="843.0" layoutY="17.0" prefHeight="39.0" prefWidth="161.0" promptText="Type du medicament" styleClass="search_select" visibleRowCount="2" />
             <Button layoutX="1014.0" layoutY="17.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="39.0" styleClass="search_button">
                <font>
                   <Font size="14.0" />

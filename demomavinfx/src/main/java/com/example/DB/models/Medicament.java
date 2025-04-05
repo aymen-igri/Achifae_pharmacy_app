@@ -58,22 +58,24 @@ public class Medicament implements Operations {
 
     @Override
     public void insert(String URL){
-        String sql = "INSERT INTO Medicaments(id_med, nom_med, quantité_med, prix_med, date_exp_med, forn_med, type_med) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Medicaments(nom_med, quantité_med, prix_med, date_exp_med, forn_med, type_med) VALUES(?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(URL);
+        try (Connection conn = DatabaseManager.getConnection(URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(2,getName());
-            pstmt.setInt(3,getQuantity());
-            pstmt.setDouble(4,getPrice());
-            pstmt.setString(5,getExpirationDate());
-            pstmt.setString(6,getSupplier());
-            pstmt.setString(7,getType());
+            pstmt.setString(1,getName());
+            pstmt.setInt(2,getQuantity());
+            pstmt.setDouble(3,getPrice());
+            pstmt.setString(4,getExpirationDate());
+            pstmt.setString(5,getSupplier());
+            pstmt.setString(6,getType());
 
             pstmt.executeUpdate();
+            conn.commit();
             System.out.println("Medicament inserted successfully!");
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage()); // Re-throwing the exception to handle it at a higher level if needed
+            System.out.println(e.getMessage()); 
+            // Re-throwing the exception to handle it at a higher level if needed
         }
     }
 
@@ -82,7 +84,7 @@ public class Medicament implements Operations {
         String sql="SELECT COUNT(id_med) FROM Medicaments";
 
         int count = 0;
-        try(Connection conn = DriverManager.getConnection(URL);
+        try(Connection conn = DatabaseManager.getConnection(URL);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             java.sql.ResultSet rs = pstmt.executeQuery()){
                if (rs.next()){
