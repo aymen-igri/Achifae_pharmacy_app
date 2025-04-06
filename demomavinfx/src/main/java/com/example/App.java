@@ -14,12 +14,6 @@ public class App extends Application {
         SignIn signIn = new SignIn();
         signIn.firstpage(primaryStage);
     }
-
-    @Override
-    public void stop() {
-        // No need to close connection here anymore
-        System.out.println("Application is shutting down");
-    }
     
     public static void main(String[] args) {
         launch(args);

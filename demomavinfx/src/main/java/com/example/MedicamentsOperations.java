@@ -2,8 +2,10 @@ package com.example;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.example.DB.models.DatabaseManager;
 import com.example.DB.models.Medicament;
 
 import javafx.collections.FXCollections;
@@ -103,6 +105,7 @@ public class MedicamentsOperations {
             type=typeComboBox.getValue();
 
             m = new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
+            System.out.println(m.toString());
             m.insert(urldb);
             showAlert(AlertType.INFORMATION, "Inscription réussie", "Utilisateur créé avec succès", "vous devez maintenant se conecter avec ces information");
 
@@ -112,7 +115,7 @@ public class MedicamentsOperations {
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
             e.printStackTrace();
-        }    
+        } 
 
     }
 

@@ -1,0 +1,30 @@
+Apr 05, 2025 6:37:31 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:31.626] [JavaFX Application Thread] STARTING COUNT operation
+Apr 05, 2025 6:37:31 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:31.626] [JavaFX Application Thread] Connection established for COUNT
+Apr 05, 2025 6:37:31 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:31.626] [JavaFX Application Thread] Set busy timeout for COUNT
+Apr 05, 2025 6:37:31 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:31.626] [JavaFX Application Thread] Executing COUNT statement
+Apr 05, 2025 6:37:31 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:31.626] [JavaFX Application Thread] COUNT completed successfully: 6
+Apr 05, 2025 6:37:45 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:45.527] [JavaFX Application Thread] STARTING COUNT operation
+Apr 05, 2025 6:37:45 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:45.527] [JavaFX Application Thread] Connection established for COUNT
+Apr 05, 2025 6:37:45 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:45.527] [JavaFX Application Thread] Set busy timeout for COUNT
+Apr 05, 2025 6:37:45 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:45.527] [JavaFX Application Thread] Executing COUNT statement
+Apr 05, 2025 6:37:45 PM com.example.DB.models.Medicament count
+INFO: [2025-04-05 18:37:45.527] [JavaFX Application Thread] COUNT completed successfully: 6
+Apr 05, 2025 6:37:57 PM com.example.DB.models.Medicament insert
+INFO: [2025-04-05 18:37:57.920] [JavaFX Application Thread] STARTING INSERT operation
+Apr 05, 2025 6:37:57 PM com.example.DB.models.Medicament insert
+INFO: [2025-04-05 18:37:57.920] [JavaFX Application Thread] Connection established for INSERT
+Apr 05, 2025 6:37:57 PM com.example.DB.models.Medicament insert
+INFO: [2025-04-05 18:37:57.920] [JavaFX Application Thread] Set busy timeout for INSERT
+Apr 05, 2025 6:37:57 PM com.example.DB.models.Medicament insert
+INFO: [2025-04-05 18:37:57.920] [JavaFX Application Thread] Executing INSERT statement
+Apr 05, 2025 6:38:03 PM com.example.DB.models.Medicament insert
+SEVERE: [2025-04-05 18:37:57.920] [JavaFX Application Thread] ERROR during INSERT: [SQLITE_BUSY] The database file is locked (database is locked)

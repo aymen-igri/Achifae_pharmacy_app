@@ -5,14 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    // Remove static connection - let each operation manage its own connection
-    public static Connection getConnection(String url) throws SQLException {
-        return DriverManager.getConnection(url);
-    }
+    private static Connection connection;
 
-    public static void closeConnection(Connection conn) throws SQLException {
-        if (conn != null && !conn.isClosed()) {
-            conn.close();
+    public static Connection getConnection(String url) throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            connection = DriverManager.getConnection(url);
         }
+        return connection;
     }
 }

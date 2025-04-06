@@ -1,14 +1,22 @@
 package com.example;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-
+import com.example.DB.models.DatabaseManager;
 import com.example.DB.models.Medicament;
 import com.example.DB.models.Pharmacien;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +25,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Medicaments {
@@ -39,9 +53,54 @@ public class Medicaments {
     @FXML
     private ComboBox<String> typeComboBox;
 
+    @FXML
+    private TableView<Medicament> medTable;
+
+    @FXML
+    private TableColumn<Medicament, Integer> id_c;
+
+    @FXML
+    private TableColumn<Medicament, String> nom_c;
+
+    @FXML
+    private TableColumn<Medicament, Integer> quantite_c;
+
+    @FXML
+    private TableColumn<Medicament, Double> prix_c;
+
+    @FXML
+    private TableColumn<Medicament, String> dateexp_c;
+
+    @FXML
+    private TableColumn<Medicament, String> fourniceur_c;
+
+    @FXML
+    private TableColumn<Medicament, String> type_c;
+
+    @FXML
+    private TextField searchNomField;
+
+    @FXML
+    private TextField searchQuantiteField;
+
+    @FXML
+    private TextField searchPrixField;
+    
+    @FXML
+    private DatePicker searchDateField;
+    
+    @FXML
+    private TextField searchFournisseurField;
+
+    @FXML
+    private FilteredList<Medicament> filteredMedicaments;
+
+    @FXML
+    private Button searchButton;
+
     public Medicaments(Pharmacien ph){
         this.ph = ph;
-        this.med=new Medicament();
+        
     }
 
     public void openpageM(ActionEvent event){
@@ -52,6 +111,7 @@ public class Medicaments {
 
                 name.setText("Nom: " + ph.getLastN());
                 role.setText("Rôle: " + ph.getRole());
+                this.med=new Medicament();
                 nbrMed.setText("LISTE DES MÉDICAMENTS("+String.valueOf(med.count(urldb))+")");
 
                 initialize(null, null);
@@ -73,21 +133,137 @@ public class Medicaments {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Avec ordonnance", "Sans ordonnance"));
+        typeComboBox.setItems(FXCollections.observableArrayList("","Avec ordonnance", "Sans ordonnance"));
+        initializeTable();
+        loadMedicamentsData();
+        setupRealTimeFiltering();
     }
 
-    public void ajouterM(ActionEvent event){
-        MedicamentsOperations m = new MedicamentsOperations(this);
-        m.openpageMO(event);
+    private void initializeTable() {
+        id_c.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        nom_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        quantite_c.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject());
+        prix_c.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        dateexp_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getExpirationDate()));
+        fourniceur_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSupplier()));
+        type_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getType()));
+    }
+
+    private void loadMedicamentsData() {
+        ObservableList<Medicament> medicaments = med.getAll(urldb);
+        medTable.setItems(medicaments);
+    }
+    private void setupRealTimeFiltering() {
+        // Wrap the ObservableList in a FilteredList
+        filteredMedicaments = new FilteredList<>(medTable.getItems(), p -> true);
+        
+        // Bind the FilteredList to the TableView
+        SortedList<Medicament> sortedList = new SortedList<>(filteredMedicaments);
+        sortedList.comparatorProperty().bind(medTable.comparatorProperty());
+        medTable.setItems(sortedList);
+        
+        // Add listeners to all search fields
+        searchNomField.textProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+        searchQuantiteField.textProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+        searchPrixField.textProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+        searchDateField.valueProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+        searchFournisseurField.textProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+        typeComboBox.valueProperty().addListener((obs, oldVal, newVal) -> updateFilter());
+    }
+
+    private void updateFilter() {
+        filteredMedicaments.setPredicate(medicament -> {
+            // If all search fields are empty, show all medicaments
+            if (allFieldsEmpty()) {
+                return true;
+            }
+            
+            // Check each field
+            boolean matchesNom = matchesString(medicament.getName(), searchNomField.getText());
+            boolean matchesQuantite = matchesNumber(medicament.getQuantity(), searchQuantiteField.getText());
+            boolean matchesPrix = matchesNumber(medicament.getPrice(), searchPrixField.getText());
+            boolean matchesDate = matchesDate(medicament.getExpirationDate(), searchDateField.getValue());
+            boolean matchesFournisseur = matchesString(medicament.getSupplier(), searchFournisseurField.getText());
+            boolean matchesType = matchesType(medicament.getType(), typeComboBox.getValue());
+            
+            return matchesNom && matchesQuantite && matchesPrix && 
+                   matchesDate && matchesFournisseur && matchesType;
+        });
+    }
+
+    private boolean allFieldsEmpty() {
+        return (searchNomField.getText() == null || searchNomField.getText().isEmpty()) &&
+               (searchQuantiteField.getText() == null || searchQuantiteField.getText().isEmpty()) &&
+               (searchPrixField.getText() == null || searchPrixField.getText().isEmpty()) &&
+               (searchDateField.getValue() == null) &&
+               (searchFournisseurField.getText() == null || searchFournisseurField.getText().isEmpty()) &&
+               (typeComboBox.getValue() == null || typeComboBox.getValue().isEmpty());
+    }
+
+    private boolean matchesString(String fieldValue, String searchValue) {
+        if (searchValue == null || searchValue.isEmpty()) {
+            return true;
+        }
+        String[] words = fieldValue.toLowerCase().split("\\s+");
+        for (String word : words) {
+            if (word.startsWith(searchValue.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean matchesNumber(Number fieldValue, String searchValue) {
+        if (searchValue == null || searchValue.isEmpty()) {
+            return true;
+        }else if (fieldValue instanceof Integer) {
+            int searchNum = Integer.parseInt(searchValue);
+            return fieldValue.intValue() == searchNum;
+        }
+        // For double prices
+        else if (fieldValue instanceof Double) {
+            double searchNum = Double.parseDouble(searchValue);
+            return fieldValue.doubleValue() == searchNum;
+        }
+        return String.valueOf(fieldValue).equals(searchValue);
+    }
+
+    private boolean matchesDate(String fieldValue, LocalDate searchValue) {
+        if (searchValue == null) {
+            return true;
+        }
+        String formattedDate = searchValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return fieldValue.contains(formattedDate);
+    }
+
+    private boolean matchesType(String fieldValue, String searchValue) {
+        if (searchValue == null || searchValue.isEmpty()) {
+            return true;
+        }
+        return fieldValue.equals(searchValue);
+    }
+
+    public void ajouterM(ActionEvent event) {
+        try {
+            // Refresh the label to ensure the count operation is completed
+            refreshNbrMedLabel();
+    
+            // Open the insert window
+            MedicamentsOperations m = new MedicamentsOperations(this);
+            m.openpageMO(event);
+        } catch (Exception e) {
+            System.out.println("Error in ajouterM: " + e.getMessage());
+        }
     }
 
     public void refreshNbrMedLabel() {
         try {
             int count = med.count(urldb);
             nbrMed.setText("LISTE DES MÉDICAMENTS(" + count + ")");
+            loadMedicamentsData();
         } catch (Exception e) {
             System.out.println("Error refreshing label: " + e.getMessage());
-        }
+        } 
     }
     
     public void openTab(ActionEvent event){

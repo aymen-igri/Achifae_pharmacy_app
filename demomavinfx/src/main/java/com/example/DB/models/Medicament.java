@@ -3,7 +3,11 @@ package com.example.DB.models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Medicament implements Operations {
     private int id_med;
@@ -15,7 +19,8 @@ public class Medicament implements Operations {
     private String type_med;
 
     // Constructeur
-    public Medicament( String name, int quantity, double price, String expirationDate, String supplier, String type) {
+    public Medicament(String name, int quantity, double price, String expirationDate, String supplier, String type) {
+        this.id_med = 0; // Assuming ID is auto-generated in the database
         this.name_med = name;
         this.quantity_med = quantity;
         this.price_med = price;
@@ -25,6 +30,7 @@ public class Medicament implements Operations {
     }
 
     public Medicament() {
+        this.id_med = 0;
         this.name_med = "";
         this.quantity_med = 0;
         this.price_med = 0;
@@ -57,42 +63,82 @@ public class Medicament implements Operations {
     }
 
     @Override
-    public void insert(String URL){
+    public synchronized void insert(String URL) {
         String sql = "INSERT INTO Medicaments(nom_med, quantité_med, prix_med, date_exp_med, forn_med, type_med) VALUES(?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1,getName());
-            pstmt.setInt(2,getQuantity());
-            pstmt.setDouble(3,getPrice());
-            pstmt.setString(4,getExpirationDate());
-            pstmt.setString(5,getSupplier());
-            pstmt.setString(6,getType());
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+                
 
+            // Set parameters for the prepared statement
+            pstmt.setString(1, getName());
+            pstmt.setInt(2, getQuantity());
+            pstmt.setDouble(3, getPrice());
+            pstmt.setString(4, getExpirationDate());
+            pstmt.setString(5, getSupplier());
+            pstmt.setString(6, getType());
+
+            // Execute the insert operation
             pstmt.executeUpdate();
-            conn.commit();
             System.out.println("Medicament inserted successfully!");
 
+            pstmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage()); 
-            // Re-throwing the exception to handle it at a higher level if needed
+            System.out.println("Error during insert: " + e.getMessage());
+            throw new RuntimeException("Failed to insert medicament: " + e.getMessage());
         }
     }
 
     @Override
-    public int count(String URL){
-        String sql="SELECT COUNT(id_med) FROM Medicaments";
-
+    public synchronized int count(String URL) {
+        String sql = "SELECT COUNT(id_med) FROM Medicaments";
         int count = 0;
-        try(Connection conn = DatabaseManager.getConnection(URL);
+
+        try (Connection conn = DatabaseManager.getConnection(URL);
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            java.sql.ResultSet rs = pstmt.executeQuery()){
-               if (rs.next()){
-                count=rs.getInt(1);
-               }
-            }catch(Exception e){
-               System.out.println("error:"+e.getMessage());
+            java.sql.ResultSet rs = pstmt.executeQuery()) {
+
+            // Retrieve the count from the result set
+            if (rs.next()) {
+                count = rs.getInt(1);
             }
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error counting medicaments: " + e.getMessage());
+        }
+
         return count;
     }
+
+    public synchronized ObservableList<Medicament> getAll(String URL) {
+        String sql = "SELECT * FROM Medicaments";
+        ObservableList<Medicament> medicaments = FXCollections.observableArrayList();
+
+        try (Connection conn = DatabaseManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Medicament med = new Medicament(
+                    rs.getString("nom_med"),
+                    rs.getInt("quantité_med"),
+                    rs.getDouble("prix_med"),
+                    rs.getString("date_exp_med"),
+                    rs.getString("forn_med"),
+                    rs.getString("type_med")
+                );
+                med.setId(rs.getInt("id_med"));
+                medicaments.add(med);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching medicaments: " + e.getMessage());
+        }
+
+        return medicaments;
+    }
+    
 }
