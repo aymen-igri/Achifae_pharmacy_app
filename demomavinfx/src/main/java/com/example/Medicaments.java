@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -95,9 +97,6 @@ public class Medicaments {
     @FXML
     private FilteredList<Medicament> filteredMedicaments;
 
-    @FXML
-    private Button searchButton;
-
     public Medicaments(Pharmacien ph){
         this.ph = ph;
         
@@ -134,10 +133,29 @@ public class Medicaments {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         typeComboBox.setItems(FXCollections.observableArrayList("","Avec ordonnance", "Sans ordonnance"));
+
+        //this is for the table
         initializeTable();
         loadMedicamentsData();
+
+        //this is for the search action
         setupRealTimeFiltering();
+
+        //this for the update action
+        medTable.setRowFactory(tv -> {
+            TableRow<Medicament> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Medicament selectedMed = row.getItem();
+                    MedicamentsUpdate updateController = new MedicamentsUpdate(this);
+                    updateController.openpageMU(null, selectedMed);
+                }
+            });
+            return row;
+        });
     }
+
+    
 
     private void initializeTable() {
         id_c.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
@@ -249,7 +267,7 @@ public class Medicaments {
             refreshNbrMedLabel();
     
             // Open the insert window
-            MedicamentsOperations m = new MedicamentsOperations(this);
+            MedicamentsAdd m = new MedicamentsAdd(this);
             m.openpageMO(event);
         } catch (Exception e) {
             System.out.println("Error in ajouterM: " + e.getMessage());
@@ -321,3 +339,4 @@ public class Medicaments {
         alert.showAndWait();
     }
 }
+

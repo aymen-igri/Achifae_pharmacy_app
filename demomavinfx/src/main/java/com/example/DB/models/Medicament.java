@@ -90,6 +90,37 @@ public class Medicament implements Operations {
         }
     }
 
+    public synchronized void update(String URL) {
+        String sql = "UPDATE Medicaments SET nom_med = ?, quantité_med = ?, prix_med = ?, "
+                + "date_exp_med = ?, forn_med = ?, type_med = ? WHERE id_med = ?";
+
+        try (Connection conn = DatabaseManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters for the prepared statement
+            pstmt.setString(1, getName());
+            pstmt.setInt(2, getQuantity());
+            pstmt.setDouble(3, getPrice());
+            pstmt.setString(4, getExpirationDate());
+            pstmt.setString(5, getSupplier());
+            pstmt.setString(6, getType());
+            pstmt.setInt(7, getId());
+
+            // Execute the update operation
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Updating medicament failed, no rows affected.");
+            }
+            
+            System.out.println("Medicament updated successfully!");
+
+        } catch (SQLException e) {
+            System.out.println("Error during update: " + e.getMessage());
+            throw new RuntimeException("Failed to update medicament: " + e.getMessage());
+        }
+    }
+
     @Override
     public synchronized int count(String URL) {
         String sql = "SELECT COUNT(id_med) FROM Medicaments";
