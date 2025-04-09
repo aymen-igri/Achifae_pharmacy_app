@@ -63,32 +63,26 @@ public class Medicament implements Operations {
     }
 
     @Override
-    public synchronized void insert(String URL) {
-        String sql = "INSERT INTO Medicaments(nom_med, quantité_med, prix_med, date_exp_med, forn_med, type_med) VALUES(?, ?, ?, ?, ?, ?)";
+public synchronized void insert(String URL) {
+    String sql = "INSERT INTO Medicaments(nom_med, quantité_med, prix_med, date_exp_med, forn_med, type_med) VALUES(?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseManager.getConnection(URL);
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
-                
+    try (Connection conn = DatabaseManager.getConnection(URL);
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        
+        pstmt.setString(1, getName());
+        pstmt.setInt(2, getQuantity());
+        pstmt.setDouble(3, getPrice());
+        pstmt.setString(4, getExpirationDate());
+        pstmt.setString(5, getSupplier());
+        pstmt.setString(6, getType());
 
-            // Set parameters for the prepared statement
-            pstmt.setString(1, getName());
-            pstmt.setInt(2, getQuantity());
-            pstmt.setDouble(3, getPrice());
-            pstmt.setString(4, getExpirationDate());
-            pstmt.setString(5, getSupplier());
-            pstmt.setString(6, getType());
-
-            // Execute the insert operation
-            pstmt.executeUpdate();
-            System.out.println("Medicament inserted successfully!");
-
-            pstmt.close();
-        } catch (SQLException e) {
-            System.out.println("Error during insert: " + e.getMessage());
-            throw new RuntimeException("Failed to insert medicament: " + e.getMessage());
-        }
+        pstmt.executeUpdate();
+        System.out.println("Medicament inserted successfully!");
+    } catch (SQLException e) {
+        System.out.println("Error during insert: " + e.getMessage());
+        throw new RuntimeException("Failed to insert medicament: " + e.getMessage());
     }
+}
 
     public synchronized void update(String URL) {
         String sql = "UPDATE Medicaments SET nom_med = ?, quantité_med = ?, prix_med = ?, "
@@ -163,7 +157,10 @@ public class Medicament implements Operations {
                 );
                 med.setId(rs.getInt("id_med"));
                 medicaments.add(med);
+                
             }
+            rs.close();
+            pstmt.close();
 
         } catch (SQLException e) {
             System.out.println("Error fetching medicaments: " + e.getMessage());

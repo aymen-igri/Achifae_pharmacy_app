@@ -97,6 +97,9 @@ public class Pharmacien extends Utilisateur implements Operations{
                 } else {
                     System.out.println("Invalid username or password.");
                 }
+                rs.close();
+                pstmt.close();
+                conn.close();
             }   
         }catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
@@ -128,6 +131,8 @@ public class Pharmacien extends Utilisateur implements Operations{
                         rs.getString("password_ph"),
                         rs.getString("role_ph")
                     );
+                    rs.close();
+                    conn.close();
                     return pharmacien;
                 }
                 return null;

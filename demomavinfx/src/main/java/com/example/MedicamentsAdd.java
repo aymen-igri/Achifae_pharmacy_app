@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.InputStream;
-import java.lang.classfile.Label;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -106,6 +105,8 @@ public class MedicamentsAdd {
             fourniceur=fourniceurMed.getText();
             dateExpiraiton=dateExpiraitonMed.getValue().toString();
             type=typeComboBox.getValue();
+
+            m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
 
             m.insert(urldb);
             m = new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
