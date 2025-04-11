@@ -1,18 +1,17 @@
 package com.example;
 
 import java.io.InputStream;
+import javafx.scene.Node;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.DatabaseManager;
+import com.example.DB.models.Client;
 import com.example.DB.models.Medicament;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,47 +22,44 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MedicamentsAdd {
-
-    
-
+public class ClientsAdd {
     private Image icon;
 
-    private Medicament m;
+    private Client cli;
 
-    private Medicaments ms;
+    private Clients clients;
 
     private String urldb = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
     private String nom;
-    private int quantite;
-    private int prix;
-    private String fourniceur;
-    private String dateExpiraiton;
-    private String type;
+    private String prenom;
+    private String sexe;
+    private int tele;
+    private String email;
+    private String adresse;
 
     @FXML
     private ComboBox<String> typeComboBox;
 
     @FXML
-    private TextField nomMed;
+    private TextField nomcli;
 
     @FXML
-    private TextField quantiteMed;
+    private TextField prencli;
 
     @FXML
-    private TextField prixMed;
+    private TextField telecli;
 
     @FXML
-    private TextField fourniceurMed;
+    private TextField emailcli;
 
     @FXML
-    private DatePicker dateExpiraitonMed;
+    private TextField adressecli;
 
-    public MedicamentsAdd(Medicaments ms){this.ms=ms;}
+    public ClientsAdd(Clients clients){this.clients=clients;}
     
-    public void openpageMO(ActionEvent event){
+    public void openpagecli(ActionEvent event){
         try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/medicamentsAdd.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clientsAdd.fxml"));
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
@@ -75,7 +71,7 @@ public class MedicamentsAdd {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Ajouter un médicament");
+                stage.setTitle("Ajouter un client");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -89,32 +85,32 @@ public class MedicamentsAdd {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Avec ordonnance", "Sans ordonnance"));
+        typeComboBox.setItems(FXCollections.observableArrayList("Homme", "Femme"));
     }
 
 
-    public void ajouterM(ActionEvent event){
+    public void ajoutercli(ActionEvent event){
 
-        if(nomMed.getText().isEmpty() || quantiteMed.getText().isEmpty() || prixMed.getText().isEmpty() || fourniceurMed.getText().isEmpty() || dateExpiraitonMed.getValue() == null || typeComboBox.getValue() == null) {
+        if(nomcli.getText().isEmpty() || prencli.getText().isEmpty() || telecli.getText().isEmpty() || emailcli.getText().isEmpty() || adressecli.getText().isEmpty() || typeComboBox.getValue() == null) {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
         try{
-            nom=nomMed.getText();
-            quantite=Integer.parseInt(quantiteMed.getText());
-            prix=Integer.parseInt(prixMed.getText());
-            fourniceur=fourniceurMed.getText();
-            dateExpiraiton=dateExpiraitonMed.getValue().toString();
-            type=typeComboBox.getValue();
+            nom=nomcli.getText();
+            prenom=prencli.getText();
+            sexe=typeComboBox.getValue();
+            tele=Integer.parseInt(telecli.getText());
+            email=emailcli.getText();
+            adresse=adressecli.getText();
 
-            m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
+            cli = new Client(nom,prenom,sexe,tele,email,adresse); 
 
-            m.insert(urldb);
-            System.out.println(m.toString());
+            cli.insert(urldb);
+            System.out.println(cli.toString());
             
             showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
 
-            ms.refreshNbrMedLabel();
+            clients.refreshNbrMedLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
             
@@ -135,4 +131,3 @@ public class MedicamentsAdd {
         alert.showAndWait();
     }
 }
-

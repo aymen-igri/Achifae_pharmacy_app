@@ -170,6 +170,7 @@ public class Medicaments {
     private void loadMedicamentsData() {
         ObservableList<Medicament> medicaments = med.getAll(urldb);
         medTable.setItems(medicaments);
+        setupRealTimeFiltering();
     }
     private void setupRealTimeFiltering() {
         // Wrap the ObservableList in a FilteredList

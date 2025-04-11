@@ -1,11 +1,11 @@
 package com.example;
 
 import java.io.InputStream;
-import javafx.scene.control.Label;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import com.example.DB.models.Client;
 import com.example.DB.models.Medicament;
 
 import javafx.collections.FXCollections;
@@ -19,22 +19,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
-public class MedicamentsUpdate {
-
+public class ClientsUpdate {
     @FXML
-    private Label idMed;
+    private Label idCli;
 
     private Image icon;
 
-    private Medicament m;
+    private Client cli;
 
-    private Medicaments ms;
+    private Clients clients;
 
     private String urldb = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
 
@@ -42,30 +41,31 @@ public class MedicamentsUpdate {
     private ComboBox<String> typeComboBox;
 
     @FXML
-    private TextField nomMed;
+    private TextField nomCli;
 
     @FXML
-    private TextField quantiteMed;
+    private TextField prenCli;
 
     @FXML
-    private TextField prixMed;
+    private TextField teleCli;
 
     @FXML
-    private TextField fourniceurMed;
+    private TextField emailCli;
 
     @FXML
-    private DatePicker dateExpiraitonMed;
+    private TextField adresseCli;
 
 
-    public MedicamentsUpdate(Medicaments ms){this.ms=ms;}
 
-    public void openpageMU(ActionEvent event,Medicament m){
+    public ClientsUpdate(Clients clients){this.clients=clients;}
+
+    public void openpagecliu(ActionEvent event,Client c){
         try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/medicamentsUpdate.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/clientsUpdate.fxml"));
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
-                idMed.setText("Modifier le medicament N:" + m.getId());
+                idCli.setText("Modifier le client N:" + c.getId());
 
                 initialize(null, null);
                 InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/icon3.png");
@@ -75,7 +75,7 @@ public class MedicamentsUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier un client");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -83,15 +83,14 @@ public class MedicamentsUpdate {
                 stage.show();
 
                 // like a controller hhhhhhhhhhhh 
-                this.m = m;
+                this.cli = c;
 
-                nomMed.setText(m.getName());
-                quantiteMed.setText(String.valueOf(m.getQuantity()));
-                prixMed.setText(String.valueOf(m.getPrice()));
-                fourniceurMed.setText(m.getSupplier());
-                dateExpiraitonMed.setValue(LocalDate.parse(m.getExpirationDate()));
-                typeComboBox.setValue(m.getType());
-
+                nomCli.setText(cli.getName());
+                prenCli.setText(cli.getLastN());
+                teleCli.setText(String.valueOf(cli.getPhoneNumber()));
+                emailCli.setText(cli.getEmail());
+                adresseCli.setText(cli.getAddress());
+                typeComboBox.setValue(cli.getGender());
         }catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
@@ -101,40 +100,38 @@ public class MedicamentsUpdate {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Avec ordonnance", "Sans ordonnance"));
+        typeComboBox.setItems(FXCollections.observableArrayList("Homme", "Femme"));
     }
 
 
-    public void modifierM(ActionEvent event){
+    public void modifiercli(ActionEvent event){
 
-        if(nomMed.getText().isEmpty() || quantiteMed.getText().isEmpty() || prixMed.getText().isEmpty() || fourniceurMed.getText().isEmpty() || dateExpiraitonMed.getValue() == null || typeComboBox.getValue() == null) {
+        if(nomCli.getText().isEmpty() || prenCli.getText().isEmpty() || teleCli.getText().isEmpty() || emailCli.getText().isEmpty() || adresseCli.getText().isEmpty() || typeComboBox.getValue() == null) {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
         try{
-            m.setName(nomMed.getText());
-            m.setQuantity(Integer.parseInt(quantiteMed.getText()));
-            m.setPrice(Double.parseDouble(prixMed.getText()));
-            m.setSupplier(fourniceurMed.getText());
-            m.setExpirationDate(dateExpiraitonMed.getValue().toString());
-            m.setType(typeComboBox.getValue());
+            cli.setName(nomCli.getText());
+            cli.setLastN(prenCli.getText());
+            cli.setPhoneNumber(Integer.parseInt(teleCli.getText()));
+            cli.setEmail(emailCli.getText());
+            cli.setAddress(adresseCli.getText());
+            cli.setGender(typeComboBox.getValue());
 
-            if (!isNumeric(quantiteMed.getText()) || !isNumeric(prixMed.getText())) {
+            if (!isNumeric(teleCli.getText()) || !isNumeric(teleCli.getText())) {
                 showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Quantité et Prix doivent être des nombres", "");
+                         "Le nbr de tele doit être des nombres", ""); 
                 return;
             }
 
-            System.out.println(m.toString());
-            m.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + m.getId() + " a été mis à jour", "");
+            System.out.println(cli.toString());
+            cli.update(urldb);
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + cli.getId() + " a été mis à jour", "");
             
-            ms.refreshNbrMedLabel();
-
+            clients.refreshNbrMedLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
             
-            ((Stage) nomMed.getScene().getWindow()).close();
         }catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
