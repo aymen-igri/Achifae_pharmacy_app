@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.DB.models.Medicament;
+import com.example.DB.models.Ordonnance;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -21,47 +22,49 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MedicamentsAdd {
-
-    
-
+public class OrdonnancesAdd {
     private Image icon;
 
-    private Medicament m;
+    private Ordonnance ord;
 
-    private Medicaments ms;
+    private Ordonnances ords;
 
     private String urldb = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
-    private String nom;
-    private int quantite;
-    private int prix;
-    private String fourniceur;
-    private String dateExpiraiton;
-    private String type;
+    private int idc;
+    private int idm;
+    private String nomd;
+    private String ctd;
+    private String dateo;
+    private String datee;
+    private String etat;
+
 
     @FXML
     private ComboBox<String> typeComboBox;
 
     @FXML
-    private TextField nomMed;
+    private TextField idCli;
 
     @FXML
-    private TextField quantiteMed;
+    private TextField idMed;
 
     @FXML
-    private TextField prixMed;
+    private TextField nomDoc;
 
     @FXML
-    private TextField fourniceurMed;
+    private TextField contDoc;
 
     @FXML
-    private DatePicker dateExpiraitonMed;
+    private DatePicker dateOrd;
 
-    public MedicamentsAdd(Medicaments ms){this.ms=ms;}
+    @FXML
+    private DatePicker dateExp;
+
+    public OrdonnancesAdd(Ordonnances ords){this.ords=ords;}
     
-    public void openpageMO(ActionEvent event){
+    public void openpageOrd(ActionEvent event){
         try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/medicamentsAdd.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ordonnancesAdd.fxml"));
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
@@ -73,7 +76,7 @@ public class MedicamentsAdd {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Ajouter un médicament");
+                stage.setTitle("Ajouter une ordonnances");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -87,32 +90,41 @@ public class MedicamentsAdd {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Avec ordonnance", "Sans ordonnance"));
+        typeComboBox.setItems(FXCollections.observableArrayList("Expirée", "Validée"));
     }
 
 
-    public void ajouterM(ActionEvent event){
+    public void ajouterOrd(ActionEvent event){
 
-        if(nomMed.getText().isEmpty() || quantiteMed.getText().isEmpty() || prixMed.getText().isEmpty() || fourniceurMed.getText().isEmpty() || dateExpiraitonMed.getValue() == null || typeComboBox.getValue() == null) {
+        if(idCli.getText().isEmpty() || idMed.getText().isEmpty() || nomDoc.getText().isEmpty() || contDoc.getText().isEmpty() || dateOrd.getValue() == null || dateExp.getValue() == null ||typeComboBox.getValue() == null) {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
         try{
-            nom=nomMed.getText();
-            quantite=Integer.parseInt(quantiteMed.getText());
-            prix=Integer.parseInt(prixMed.getText());
-            fourniceur=fourniceurMed.getText();
-            dateExpiraiton=dateExpiraitonMed.getValue().toString();
-            type=typeComboBox.getValue();
+            idc=Integer.parseInt(idCli.getText());
+            idm=Integer.parseInt(idMed.getText());
+            nomd=nomDoc.getText();
+            ctd=contDoc.getText();
+            datee=dateExp.getValue().toString();
+            dateo=dateOrd.getValue().toString();
+            etat=typeComboBox.getValue();
 
-            m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
-
-            m.insert(urldb);
-            System.out.println(m.toString());
+            this.ord = new Ordonnance();
+            
+            ord.setClientId(idc);
+            ord.setMedicamentId(idm);
+            ord.setDoctorName(nomd);
+            ord.setDoctorContact(ctd);
+            ord.setDate(dateo);
+            ord.setExpirationDate(datee);
+            ord.setStatus(etat);
+            
+            ord.insert(urldb);
+            System.out.println(ord.toString());
             
             showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
 
-            ms.refreshNbrMedLabel();
+            ords.refreshNbrOrdLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
             
@@ -133,4 +145,3 @@ public class MedicamentsAdd {
         alert.showAndWait();
     }
 }
-

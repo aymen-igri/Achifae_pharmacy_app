@@ -1,13 +1,10 @@
 package com.example;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.DatabaseManager;
 import com.example.DB.models.Medicament;
 import com.example.DB.models.Pharmacien;
 
@@ -26,8 +23,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -99,7 +94,6 @@ public class Medicaments {
 
     public Medicaments(Pharmacien ph){
         this.ph = ph;
-        
     }
 
     public void openpageM(ActionEvent event){
@@ -155,8 +149,6 @@ public class Medicaments {
         });
     }
 
-    
-
     private void initializeTable() {
         id_c.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
         nom_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -172,11 +164,10 @@ public class Medicaments {
         medTable.setItems(medicaments);
         setupRealTimeFiltering();
     }
+
     private void setupRealTimeFiltering() {
-        // Wrap the ObservableList in a FilteredList
         filteredMedicaments = new FilteredList<>(medTable.getItems(), p -> true);
-        
-        // Bind the FilteredList to the TableView
+
         SortedList<Medicament> sortedList = new SortedList<>(filteredMedicaments);
         sortedList.comparatorProperty().bind(medTable.comparatorProperty());
         medTable.setItems(sortedList);

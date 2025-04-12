@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="373.0" styleClass="add_window" stylesheets="@medicaments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="32.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une ordonnances" textAlignment="CENTER" wrappingWidth="308.1731414794922">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="idCli" layoutX="55.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Id du client" styleClass="add_text" />
+      <TextField fx:id="nomDoc" layoutX="55.0" layoutY="102.0" prefHeight="25.0" prefWidth="126.0" promptText="Nom du docteur" styleClass="add_text" />
+      <TextField fx:id="contDoc" layoutX="190.0" layoutY="102.0" prefHeight="25.0" prefWidth="126.0" promptText="Contact du docteur" styleClass="add_text" />
+      <DatePicker fx:id="dateOrd" layoutX="55.0" layoutY="153.0" prefHeight="25.0" prefWidth="261.0" promptText="Date d'ordonnance" styleClass="add_date" />
+      <ComboBox fx:id="typeComboBox" layoutX="55.0" layoutY="254.0" prefHeight="25.0" prefWidth="261.0" promptText="L'état d'ordonnance" styleClass="add_select" />
+      <Button layoutX="155.0" layoutY="300.0" mnemonicParsing="false" onAction="#ajouterOrd" styleClass="add_button" text="Addition" />
+      <TextField fx:id="idMed" layoutX="189.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Id du medicament" styleClass="add_text" />
+      <DatePicker fx:id="dateExp" layoutX="55.0" layoutY="204.0" prefHeight="25.0" prefWidth="261.0" promptText="Date d'expiration" styleClass="add_date" />
+   </children>
+</AnchorPane>

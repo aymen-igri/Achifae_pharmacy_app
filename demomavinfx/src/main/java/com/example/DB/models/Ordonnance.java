@@ -3,13 +3,19 @@ package com.example.DB.models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Ordonnance implements Operations{
     private int id_ord;
     private int clientId_ord;
+    private String clientN_ord;
     private int medicamentId_ord;
+    private String medicamentN_ord;
     private String doctorName_ord;
     private String doctorContact_ord;
     private String date_ord;
@@ -17,9 +23,13 @@ public class Ordonnance implements Operations{
     private String status_ord;
 
     // Constructor
-    public Ordonnance(int clientId, int medicamentId, String doctorName, String doctorContact, String date, String expirationDate, String status) {
+    public Ordonnance(){}
+
+    public Ordonnance(int clientId, int medicamentId, String clientN_ord, String medicamentN_ord,  String doctorName, String doctorContact, String date, String expirationDate, String status) {
         this.clientId_ord = clientId;
+        this.clientN_ord = clientN_ord;
         this.medicamentId_ord = medicamentId;
+        this.medicamentN_ord = medicamentN_ord;
         this.doctorName_ord = doctorName;
         this.doctorContact_ord = doctorContact;
         this.date_ord = date;
@@ -30,7 +40,9 @@ public class Ordonnance implements Operations{
     // Getters
     public int getId() {return id_ord;}
     public int getClientId() {return clientId_ord;}
+    public String getClientN() {return clientN_ord;}
     public int getMedicamentId() {return medicamentId_ord;}
+    public String getMedicamentN() {return medicamentN_ord;}
     public String getDoctorName() {return doctorName_ord;}
     public String getDoctorContact() {return doctorContact_ord;}
     public String getDate() {return date_ord;}
@@ -40,7 +52,9 @@ public class Ordonnance implements Operations{
     // Setters
     public void setId(int id) {this.id_ord = id;}
     public void setClientId(int clientId) {this.clientId_ord = clientId;}
+    public void setClientN(String clientN) {this.clientN_ord = clientN;}
     public void setMedicamentId(int medicamentId) {this.medicamentId_ord = medicamentId;}
+    public void setMedicamentN(String medicamentN) {this.medicamentN_ord = medicamentN;}
     public void setDoctorName(String doctorName) {this.doctorName_ord = doctorName;}
     public void setDoctorContact(String doctorContact) {this.doctorContact_ord = doctorContact;}
     public void setDate(String date) {this.date_ord = date;}
@@ -96,4 +110,44 @@ public class Ordonnance implements Operations{
             }
         return count;
     }
+
+    public synchronized ObservableList<Ordonnance> getAll(String URL) {
+        String sql = "SELECT o.*, c.nom_cli, m.nom_med " +
+                     "FROM Ordonnances o " +
+                     "INNER JOIN Clients c ON o.id_cli = c.id_cli " +
+                     "INNER JOIN Medicaments m ON o.id_med = m.id_med";
+        
+        ObservableList<Ordonnance> ordonnances = FXCollections.observableArrayList();
+    
+        try (Connection conn = DatabaseManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+    
+            while (rs.next()) {
+                // 1. Create Ordonnance object with client/medicament IDs and names
+                Ordonnance ord = new Ordonnance(
+                    rs.getInt("id_cli"),        // Client ID (from Ordonnances)
+                    rs.getInt("id_med"),       // Medicament ID (from Ordonnances)
+                    rs.getString("nom_cli"),   // Client name (from Clients)
+                    rs.getString("nom_med"),   // Medicament name (from Medicaments)
+                    rs.getString("nom_doc_ord"),
+                    rs.getString("conta_doc_ord"),
+                    rs.getString("date_ord"),
+                    rs.getString("date_exp_ord"),
+                    rs.getString("statu_ord")
+                );
+                
+                // 2. Set the ordonnance ID separately
+                ord.setId(rs.getInt("id_ord"));
+                
+                ordonnances.add(ord);
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("Error fetching ordonnances: " + e.getMessage());
+        }
+    
+        return ordonnances;
+    }
+
 }
