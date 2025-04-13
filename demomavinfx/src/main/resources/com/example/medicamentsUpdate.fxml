@@ -17,7 +17,7 @@
       <TextField fx:id="fourniceurMed" layoutX="55.0" layoutY="204.0" prefHeight="25.0" prefWidth="261.0" promptText="Fourniceur" styleClass="add_text" />
       <ComboBox fx:id="typeComboBox" layoutX="55.0" layoutY="254.0" prefHeight="25.0" prefWidth="261.0" promptText="Type" styleClass="add_select" />
       <Button layoutX="155.0" layoutY="300.0" mnemonicParsing="false" onAction="#modifierM" styleClass="add_button" text="Modifier" />
-      <Label fx:id="idMed" layoutX="59.0" layoutY="14.0" text="Modifier le medicament N:%d" textFill="WHITE">
+      <Label fx:id="idMed" layoutX="67.0" layoutY="14.0" text="Modifier le medicament N:d" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

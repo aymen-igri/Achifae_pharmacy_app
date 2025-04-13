@@ -94,6 +94,49 @@ public class Ordonnance implements Operations{
         }
     }
 
+    public void update(String URL) {
+        String sql = "UPDATE Ordonnances SET " +
+                    "id_cli = ?, " +
+                    "id_med = ?, " +
+                    "nom_doc_ord = ?, " +
+                    "conta_doc_ord = ?, " +
+                    "date_ord = ?, " +
+                    "date_exp_ord = ?, " +
+                    "statu_ord = ? " +
+                    "WHERE id_ord = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL)) {
+            // Enable foreign key constraints
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("PRAGMA foreign_keys = ON");
+            }
+
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, getClientId());
+                pstmt.setInt(2, getMedicamentId());
+                pstmt.setString(3, getDoctorName());
+                pstmt.setString(4, getDoctorContact());
+                pstmt.setString(5, getDate());
+                pstmt.setString(6, getExpirationDate());
+                pstmt.setString(7, getStatus());
+                pstmt.setInt(8, getId());
+
+                int rows = pstmt.executeUpdate();
+
+                if (rows > 0) {
+                    System.out.println("Ordonnance updated successfully!");
+                } else {
+                    System.out.println("No ordonnance found with ID: " + getId());
+                }
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error updating ordonnance: " + e.getMessage());
+        }
+    }
+
+
     @Override
     public int count(String URL){
         String sql="SELECT COUNT(id_ord) FROM Ordonnances";

@@ -143,7 +143,17 @@ public class Ordonnances {
         setupRealTimeFiltering();
 
         //this for the update action
-        
+        ordTable.setRowFactory(tv -> {
+            TableRow<Ordonnance> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Ordonnance selectedOrd = row.getItem();
+                    OrdonnancesUpdate updateController = new OrdonnancesUpdate(this);
+                    updateController.openpageOrd(null, selectedOrd);
+                }
+            });
+            return row;
+        });
     }
 
     private void initializeTable() {
@@ -159,7 +169,6 @@ public class Ordonnances {
 
     private void loadMedicamentsData() {
         ObservableList<Ordonnance> ordonnances = ord.getAll(urldb);
-        System.out.println("Number of ordonnances loaded: " + ordonnances.size());
         ordTable.setItems(ordonnances);
         setupRealTimeFiltering();
     }
