@@ -5,12 +5,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.Client;
-import com.example.DB.models.Medicament;
 import com.example.DB.models.Ordonnance;
 import com.example.DB.models.Pharmacien;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

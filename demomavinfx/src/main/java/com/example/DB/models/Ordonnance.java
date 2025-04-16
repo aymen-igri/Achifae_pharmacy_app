@@ -182,7 +182,6 @@ public class Ordonnance implements Operations{
                 
                 // 2. Set the ordonnance ID separately
                 ord.setId(rs.getInt("id_ord"));
-                
                 ordonnances.add(ord);
             }
     

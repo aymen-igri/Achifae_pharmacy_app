@@ -2,8 +2,6 @@ package com.example;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import com.example.DB.models.DatabaseManager;
-import java.sql.SQLException;
 
 /**
  * JavaFX App

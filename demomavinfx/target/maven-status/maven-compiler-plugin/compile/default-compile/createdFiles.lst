@@ -3,6 +3,8 @@ com\example\MedicamentsUpdate.class
 com\example\ClientsAdd.class
 com\example\DB\models\Ordonnance.class
 com\example\Ventes.class
+com\example\OrdonnancesAdd.class
+com\example\OrdonnancesUpdate.class
 com\example\DB\models\Medicament.class
 com\example\Réapprovisionnements.class
 com\example\DB\models\DatabaseManager.class
