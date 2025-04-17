@@ -131,6 +131,7 @@ public class Pharmacien extends Utilisateur implements Operations{
                         rs.getString("password_ph"),
                         rs.getString("role_ph")
                     );
+                    pharmacien.setId(rs.getInt("id_ph"));
                     rs.close();
                     conn.close();
                     return pharmacien;

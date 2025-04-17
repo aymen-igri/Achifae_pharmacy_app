@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.Medicament;
 import com.example.DB.models.Ordonnance;
 import com.example.DB.models.Pharmacien;
 import com.example.DB.models.Vente;
@@ -13,7 +12,6 @@ import com.example.DB.models.Vente;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -25,7 +23,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -136,6 +133,17 @@ public class Ventes {
         setupRealTimeFiltering();
 
         //this for the update action
+        venTable.setRowFactory(tv -> {
+            TableRow<Vente> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Vente selectedOrd = row.getItem();
+                    VentesUpdate updateController = new VentesUpdate(this,ph);
+                    updateController.openpageVen(null, selectedOrd);
+                }
+            });
+            return row;
+        });
     }
 
     private void initializeTable() {
@@ -245,11 +253,27 @@ public class Ventes {
         return fieldValue.contains(formattedDate);
     }
 
-    private boolean matchesType(String fieldValue, String searchValue) {
-        if (searchValue == null || searchValue.isEmpty()) {
-            return true;
+    public void ajouterVen(ActionEvent event) {
+        try {
+            // Refresh the label to ensure the count operation is completed
+            refreshNbrVenLabel();
+    
+            // Open the insert window
+            VentesAdd ven = new VentesAdd(this,this.ph.getId());
+            ven.openpageVen(event);
+        } catch (Exception e) {
+            System.out.println("Error in ajouterM: " + e.getMessage());
         }
-        return fieldValue.equals(searchValue);
+    }
+
+    public void refreshNbrVenLabel() {
+        try {
+            int count = ven.count(urldb);
+            nbrVen.setText("LISTE DES VENTES(" + count + ")");
+            loadMedicamentsData();
+        } catch (Exception e) {
+            System.out.println("Error refreshing label: " + e.getMessage());
+        } 
     }
 
     public void openTab(ActionEvent event){

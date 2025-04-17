@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.Medicament;
 import com.example.DB.models.Ordonnance;
 
 import javafx.collections.FXCollections;
@@ -135,7 +134,6 @@ public class OrdonnancesAdd {
         } 
 
     }
-
     
     private void showAlert(AlertType alertType, String title, String header, String content) {
         Alert alert = new Alert(alertType);

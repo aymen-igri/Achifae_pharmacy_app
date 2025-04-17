@@ -205,7 +205,7 @@ public class Ordonnances {
 
             
             return matchesNomCli && matchesNomMed && matchesNomDoc && 
-                   matchesDate && matchesDateExp && matchesStatus && matchesConDoc;
+                   matchesDate && matchesDateExp && matchesStatus && matchesConDoc; 
         });
     }
 
