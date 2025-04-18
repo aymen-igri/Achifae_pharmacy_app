@@ -1,13 +1,15 @@
 package com.example;
 
-
 import java.io.InputStream;
 import javafx.scene.control.Label;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 import com.example.DB.models.Pharmacien;
-import com.example.DB.models.Vente;
+import com.example.DB.models.Réapprovisionnement;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,51 +18,51 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class VentesUpdate {
+public class RéapprovisionnementsUpdate {
 
     @FXML
-    private Label idVen;
-
-    @FXML
-    private Label nomCli;
+    private Label idRea;
 
     @FXML
     private Label nomMed;
 
     private Image icon;
 
-    private Vente ven;
-    private Ventes vens;
+    private Réapprovisionnement rea;
+
+    private Réapprovisionnements reas;
 
     private Pharmacien ph;
 
     private String urldb = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
 
     @FXML
+    private ComboBox<String> typeComboBox;
+
+    @FXML
     private TextField quantité;
 
     @FXML
-    private TextField prix;
+    private DatePicker date;
 
-    @FXML
-    private DatePicker dateVen;
+    public RéapprovisionnementsUpdate(Réapprovisionnements reas, Pharmacien ph){this.reas=reas;this.ph=ph;}
 
-    public VentesUpdate(Ventes vens,Pharmacien ph){this.vens=vens;this.ph=ph;}
-
-    public void openpageVen(ActionEvent event,Vente ven){
+    public void openpageReaU(ActionEvent event,Réapprovisionnement rea){
         try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/ventesUpdate.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/réapprovisionnementsUpdate.fxml"));
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
-                idVen.setText("Modifier le vente N:" + idVen.getId());
+                idRea.setText("Modifier la réapprovisionnement N:" + rea.getId());
 
+                initialize(null, null);
                 InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/icon3.png");
 
                 icon = new Image(iconStream);
@@ -68,7 +70,7 @@ public class VentesUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier une réapprovisionnement");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -76,14 +78,11 @@ public class VentesUpdate {
                 stage.show();
 
                 // like a controller hhhhhhhhhhhh 
-                this.ven = ven;
-
-                nomCli.setText("Client:"+ven.getClientN());
-                nomMed.setText("Med:"+ven.getMedicamentN());
-                quantité.setText(String.valueOf(ven.getQuantity()));
-                prix.setText(String.valueOf(ven.getTotalPrice()));
-                dateVen.setValue(LocalDate.parse(ven.getDate()));
-
+                this.rea=rea;
+                nomMed.setText("Medicament: "+rea.getMedicamentN());
+                quantité.setText(String.valueOf(rea.getQuantity()));
+                date.setValue(LocalDate.parse(rea.getDate()));
+                typeComboBox.setValue(rea.getStatus());
 
         }catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
@@ -92,41 +91,43 @@ public class VentesUpdate {
         }
     }
 
-    public void modifierVen(ActionEvent event){
+    @FXML
+    public void initialize(URL location, ResourceBundle resources) {
+        typeComboBox.setItems(FXCollections.observableArrayList("En attente", "Annulé", "Terminé"));
+    }
 
-        if(nomMed.getText().isEmpty() || nomCli.getText().isEmpty() || quantité.getText().isEmpty() || prix.getText().isEmpty() || dateVen.getValue() == null) {
+    public void modifierRea(ActionEvent event){
+
+        if( quantité.getText().isEmpty() || date.getValue() == null || typeComboBox.getValue() == null) {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
         try{
-            Vente v = new Vente();
-            v.setPharmacienId(ph.getId());
-            v.setQuantity(Integer.parseInt(quantité.getText()));
-            v.setTotalPrice(Double.parseDouble(prix.getText()));
-            v.setDate(dateVen.getValue().toString());
+            rea.setQuantity(Integer.parseInt(quantité.getText()));
+            rea.setDate(date.getValue().toString());
+            rea.setStatus(typeComboBox.getValue());
+            rea.setPharmacienId(ph.getId());
 
-            if (!isNumeric(quantité.getText()) || !isNumeric(prix.getText())) {
+            if (!isNumeric(quantité.getText())) {
                 showAlert(AlertType.WARNING, "Valeurs invalides", 
                          "Quantité et Prix doivent être des nombres", "");
                 return;
             }
 
-            System.out.println(v.toString());
-            ven.update(urldb,v);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le vente " + ven.getId() + " a été mis à jour", "");
+            System.out.println(rea.toString());
+            rea.update(urldb);
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + rea.getId() + " a été mis à jour", "");
             
-            vens.refreshNbrVenLabel();
+            reas.refreshNbrReaLabel();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
             
-            ((Stage) nomMed.getScene().getWindow()).close();
         }catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
             e.printStackTrace();
         } 
-
     }
 
     private boolean isNumeric(String str) {
@@ -138,13 +139,13 @@ public class VentesUpdate {
         }
     }
 
-    public void supprimerVen(ActionEvent event){
+    public void supprimerRea(ActionEvent event){
         try{
            
-            ven.delete(urldb);
-            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente " + ven.getId() + " a été supprimée", "");
+            rea.delete(urldb);
+            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente " + rea.getId() + " a été supprimée", "");
             
-            vens.refreshNbrVenLabel();
+            reas.refreshNbrReaLabel();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
@@ -164,5 +165,4 @@ public class VentesUpdate {
         alert.setContentText(content);
         alert.showAndWait();
     }
-     
 }

@@ -2,9 +2,12 @@ package com.example;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.example.DB.models.Medicament;
+import com.example.DB.models.Réapprovisionnement;
+import com.example.DB.models.Vente;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -21,51 +24,41 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MedicamentsAdd {
-
-    
-
+public class RéapprovisionnementsAdd {
     private Image icon;
 
-    private Medicament m;
+    private Réapprovisionnement rea;
 
-    private Medicaments ms;
+    private int phID;
+
+    private Réapprovisionnements reas;
 
     private String urldb = "jdbc:sqlite:src/main/java/com/example/DB/pharmacy.db";
-    private String nom;
-    private int quantite;
-    private int prix;
-    private String fourniceur;
-    private String dateExpiraiton;
-    private String type;
+    private int idm;
+    private int idp;
+    private int quan;
+    private String date;
+    private String stat;
 
     @FXML
     private ComboBox<String> typeComboBox;
 
     @FXML
-    private TextField nomMed;
+    private TextField idMed;
 
     @FXML
-    private TextField quantiteMed;
+    private TextField quantité;
 
-    @FXML
-    private TextField prixMed;
+    public RéapprovisionnementsAdd(Réapprovisionnements reas, int phID){this.reas=reas;this.phID=phID;}
 
-    @FXML
-    private TextField fourniceurMed;
-
-    @FXML
-    private DatePicker dateExpiraitonMed;
-
-    public MedicamentsAdd(Medicaments ms){this.ms=ms;}
-    
-    public void openpageMO(ActionEvent event){
+    public void openpageRea(ActionEvent event){
         try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/medicamentsAdd.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/réapprovisionnementsAdd.fxml"));
                 loader.setController(this);  // Ensure FXML elements are linked
                 Parent root = loader.load();
 
                 initialize(null, null);
+
                 InputStream iconStream = getClass().getResourceAsStream("/com/example/icons/add2.png");
 
                 icon = new Image(iconStream);
@@ -73,7 +66,7 @@ public class MedicamentsAdd {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Ajouter un médicament");
+                stage.setTitle("Ajouter une réapprovisionnement");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -85,46 +78,50 @@ public class MedicamentsAdd {
         }
     }
 
-    @FXML 
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Avec ordonnance", "Sans ordonnance"));
+        typeComboBox.setItems(FXCollections.observableArrayList("En attente", "Annulé", "Terminé"));
     }
 
+    public void ajouterRea(ActionEvent event){
 
-    public void ajouterM(ActionEvent event){
-
-        if(nomMed.getText().isEmpty() || quantiteMed.getText().isEmpty() || prixMed.getText().isEmpty() || fourniceurMed.getText().isEmpty() || dateExpiraitonMed.getValue() == null || typeComboBox.getValue() == null) {
+        if(idMed.getText().isEmpty() || quantité.getText().isEmpty() || typeComboBox.getValue() == null || typeComboBox.getValue().isEmpty()) {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
         try{
-            nom=nomMed.getText();
-            quantite=Integer.parseInt(quantiteMed.getText());
-            prix=Integer.parseInt(prixMed.getText());
-            fourniceur=fourniceurMed.getText();
-            dateExpiraiton=dateExpiraitonMed.getValue().toString();
-            type=typeComboBox.getValue();
+            idm=Integer.parseInt(idMed.getText());
+            quan=Integer.parseInt(quantité.getText());
+            stat=typeComboBox.getValue();
 
-            m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
+            date=LocalDate.now().toString();
 
-            m.insert(urldb);
-            System.out.println(m.toString());
-            
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
+            this.rea = new Réapprovisionnement();
+        
+            rea.setMedicamentId(idm);
+            rea.setPharmacienId(phID);
+            rea.setQuantity(quan);
+            rea.setStatus(stat);
+            rea.setDate(date);
 
-            ms.refreshNbrMedLabel();
+            rea.insert(urldb);
+                
+                // If we get here, the insertion was successful
+            System.out.println(rea.toString());
+                
+            showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été créée avec succès", 
+                          "La vente a été ajoutée à la base de données.");
+    
+            reas.refreshNbrReaLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
-            
-        }catch(Exception e){
+        } catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
             System.out.println(e.getMessage());
             e.printStackTrace();
-        } 
-
+        }
     }
 
-    
     private void showAlert(AlertType alertType, String title, String header, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -133,4 +130,3 @@ public class MedicamentsAdd {
         alert.showAndWait();
     }
 }
-

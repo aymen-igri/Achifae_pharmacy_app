@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="257.0" prefWidth="373.0" styleClass="add_window" stylesheets="@medicaments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="217.0" layoutY="205.0" mnemonicParsing="false" onAction="#modifierRea" prefHeight="25.0" prefWidth="71.0" styleClass="add_button" text="Modifier" />
+      <Label fx:id="idRea" layoutX="29.0" layoutY="20.0" text="Modifier la réapprovisionnement N:d" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="quantité" layoutX="55.0" layoutY="103.0" prefHeight="25.0" prefWidth="126.0" promptText="Quantité" styleClass="add_text" />
+      <DatePicker fx:id="date" layoutX="190.0" layoutY="103.0" prefHeight="25.0" prefWidth="126.0" promptText="Date du vente" styleClass="add_date" />
+      <Button layoutX="82.0" layoutY="205.0" mnemonicParsing="false" onAction="#supprimerRea" styleClass="add_button" text="Supprimer" />
+      <Label fx:id="nomMed" layoutX="55.0" layoutY="59.0" text="Med:s" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="typeComboBox" layoutX="54.0" layoutY="148.0" prefHeight="25.0" prefWidth="263.0" promptText="Type" styleClass="add_select" />
+   </children>
+</AnchorPane>

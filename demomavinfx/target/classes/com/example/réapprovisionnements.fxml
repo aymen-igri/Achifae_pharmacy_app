@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" stylesheets="@réapprovisionnements.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="106.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
                <children>
@@ -24,18 +29,54 @@
                </children>
             </AnchorPane>
             <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
-            <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
+            <Button layoutX="1072.0" layoutY="37.0" mnemonicParsing="false" onAction="#ajouterRea" prefHeight="48.0" prefWidth="157.0" styleClass="add_rea_button" text="+ Ajouter un réapprov">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="nbrRea" layoutX="228.0" layoutY="7.0" prefHeight="105.0" prefWidth="824.0" text="LISTE DES RÉA(%d)">
+               <font>
+                  <Font name="Arial Bold" size="48.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0">
                <children>
                   <AnchorPane layoutX="-48.0" layoutY="3.0" prefHeight="45.0" prefWidth="176.0" />
                </children>
             </AnchorPane>
+            <TextField fx:id="searchNomMedField" layoutX="44.0" layoutY="17.0" prefHeight="39.0" prefWidth="216.0" promptText="Nom du medicament" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchQuanField" layoutX="505.0" layoutY="17.0" prefHeight="39.0" prefWidth="159.0" promptText="Quantité" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="searchNomParField" layoutX="280.0" layoutY="17.0" prefHeight="39.0" prefWidth="206.0" promptText="Nom du pharmacien" styleClass="search_text">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <DatePicker fx:id="searchDateField" layoutX="872.0" layoutY="17.0" prefHeight="39.0" prefWidth="180.0" promptText="Date de la demande" styleClass="search_date" />
+            <ComboBox fx:id="typeComboBox" layoutX="681.0" layoutY="17.0" prefHeight="39.0" prefWidth="170.0" promptText="Status de la commande" styleClass="search_select" visibleRowCount="3" />
+            <TableView fx:id="reaTable" layoutX="44.0" layoutY="72.0" prefHeight="462.0" prefWidth="1008.0">
+               <columns>
+                  <TableColumn fx:id="id_r" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="nom_med_r" prefWidth="201.33328247070312" text="NOM DU MEDICAMENT" />
+                  <TableColumn fx:id="nom_pha_r" prefWidth="201.33328247070312" text="NOM DU PHARMACIEN" />
+                  <TableColumn fx:id="quantite_r" prefWidth="117.33331298828125" text="QUANTITÉ" />
+                  <TableColumn fx:id="status_r" prefWidth="248.6666259765625" text="STATUS DE LA COMMANDE" />
+                  <TableColumn fx:id="date_r" prefWidth="161.333251953125" text="DATE DE LA DEMANDE" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </center>
