@@ -3,11 +3,8 @@ package com.example;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.Medicament;
 import com.example.DB.models.Pharmacien;
-import com.example.DB.models.Vente;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;

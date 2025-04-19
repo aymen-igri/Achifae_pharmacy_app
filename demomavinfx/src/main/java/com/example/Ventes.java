@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import com.example.DB.models.Ordonnance;
 import com.example.DB.models.Pharmacien;
 import com.example.DB.models.Vente;
 
