@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Pharmacien extends Utilisateur implements Operations{
     private String contact_ph;
@@ -141,6 +145,145 @@ public class Pharmacien extends Utilisateur implements Operations{
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void updateIP(String URL) {
+        String sql = "UPDATE Pharmacien SET nom_ph = ?, pren_ph = ?, sexe_ph = ?, cont_ph = ? WHERE id_ph = ?";
+        
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters for fields to update
+            pstmt.setString(1, getName());
+            pstmt.setString(2, getLastN());
+            pstmt.setString(3, getGender());
+            pstmt.setString(4, getContact());
+            pstmt.setInt(5, getId());
+            
+            // Execute the update
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                System.out.println("Pharmacien updated successfully!");
+            } else {
+                System.out.println("Pharmacien update failed. No rows affected.");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void updateC(String URL) {
+        String sql = "UPDATE Pharmacien SET username_ph = ?, password_ph = ? WHERE id_ph = ?";
+        
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters for fields to update
+            pstmt.setString(1, getUsername());
+            pstmt.setString(2, getPassword());
+            pstmt.setInt(3, getId());
+            
+            // Execute the update
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                System.out.println("Pharmacien updated successfully!");
+            } else {
+                System.out.println("Pharmacien update failed. No rows affected.");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void updateR(String URL) {
+        String sql = "UPDATE Pharmacien SET role_ph=? WHERE id_ph = ?";
+        
+        try (Connection conn = DriverManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            // Set parameters for fields to update
+            pstmt.setString(1, getRole());
+            pstmt.setInt(2, getId());
+            
+            // Execute the update
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows > 0) {
+                System.out.println("Pharmacien updated successfully!");
+            } else {
+                System.out.println("Pharmacien update failed. No rows affected.");
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Database error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public boolean delete(String URL) {
+        String sql = "DELETE FROM Pharmacien WHERE id_ph = ?";
+        boolean success = false;
+    
+        try (Connection conn = DriverManager.getConnection(URL)) {
+            // Enable foreign key constraints
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("PRAGMA foreign_keys = ON");
+            }
+    
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                // Set the ID parameter
+                pstmt.setInt(1, getId());
+    
+                // Execute the delete operation
+                int rowsAffected = pstmt.executeUpdate();
+                
+                if (rowsAffected > 0) {
+                    System.out.println("Réapprovisionnement with ID " + getId() + " deleted successfully!");
+                    success = true;
+                } else {
+                    System.out.println("No réapprovisionnement found with ID: " + getId());
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error deleting réapprovisionnement: " + e.getMessage());
+        }
+        
+        return success;
+    }
+
+    public synchronized ObservableList<Pharmacien> getAll(String URL) {
+        String sql = "SELECT id_ph,nom_ph,pren_ph,role_ph,sexe_ph,cont_ph FROM Pharmacien";
+        ObservableList<Pharmacien> phs = FXCollections.observableArrayList();
+
+        try (Connection conn = DatabaseManager.getConnection(URL);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                Pharmacien ph = new Pharmacien();
+                ph.setId(rs.getInt("id_ph"));
+                ph.setName(rs.getString("nom_ph"));
+                ph.setLastN(rs.getString("pren_ph"));
+                ph.setRole(rs.getString("role_ph"));
+                ph.setGender(rs.getString("sexe_ph"));
+                ph.setContact(rs.getString("cont_ph"));
+                phs.add(ph);
+                
+            }
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching medicaments: " + e.getMessage());
+        }
+
+        return phs;
     }
 
     @Override

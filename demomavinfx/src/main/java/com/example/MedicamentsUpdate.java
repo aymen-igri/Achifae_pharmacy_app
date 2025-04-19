@@ -2,7 +2,7 @@ package com.example;
 
 import java.io.InputStream;
 import javafx.scene.control.Label;
-import java.net.URL;
+import java.net.URL; 
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -142,7 +142,7 @@ public class MedicamentsUpdate {
         } 
 
     }
-
+ 
     private boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);

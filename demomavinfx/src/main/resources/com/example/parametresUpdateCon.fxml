@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="no" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="202.0" prefWidth="384.0" styleClass="window" stylesheets="@parametres.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="9.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier les informations de la connerxion" textAlignment="CENTER" wrappingWidth="366.1731414794922">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="154.0" layoutY="154.0" mnemonicParsing="false" onAction="#modifierPhC" prefHeight="34.0" prefWidth="64.0" styleClass="info" text="Modifier" />
+      <TextField fx:id="username" layoutX="74.0" layoutY="60.0" prefHeight="25.0" prefWidth="223.0" promptText="Nom d'utilisateur" styleClass="add_text" />
+      <PasswordField fx:id="password" layoutX="74.0" layoutY="110.0" prefHeight="25.0" prefWidth="223.0" promptText="Mot de pass" />
+   </children>
+</AnchorPane>

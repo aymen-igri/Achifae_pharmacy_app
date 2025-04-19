@@ -1,4 +1,5 @@
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\Parametres.java
+C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\ParametresUpdate.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\ClientsUpdate.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\Tableaudeboard.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\App.java
@@ -6,6 +7,7 @@ C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\MedicamentsAdd.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\OrdonnancesUpdate.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\module-info.java
+C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\PharmacienUpdate.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\DB\models\Vente.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\MedicamentsUpdate.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\VentesAdd.java
@@ -23,7 +25,9 @@ C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\DB\models\Client.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\Réapprovisionnements.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\VentesUpdate.java
+C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\ParametresUpdateConn.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\RéapprovisionnementsUpdate.java
+C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\ParametresUpdateInfo.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\DB\models\Ordonnance.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\DB\models\Réapprovisionnement.java
 C:\Users\pc\Documents\S2\JAVA\Pharmacy_app\demomavinfx\src\main\java\com\example\OrdonnancesAdd.java

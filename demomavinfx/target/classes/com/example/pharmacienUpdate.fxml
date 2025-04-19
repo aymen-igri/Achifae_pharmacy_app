@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="373.0" styleClass="add_window" stylesheets="@medicaments.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ComboBox fx:id="typeComboBox" layoutX="55.0" layoutY="106.0" prefHeight="25.0" prefWidth="261.0" promptText="Poste" styleClass="add_select" />
+      <Button layoutX="155.0" layoutY="156.0" mnemonicParsing="false" onAction="#modifierPh" styleClass="add_button" text="Modifier" />
+      <Label fx:id="poste" layoutX="23.0" layoutY="14.0" text="Modifier le poste du pharmacien N:%d" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="186.0" layoutY="69.0" text="Nom:s" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastN" layoutX="55.0" layoutY="69.0" text="Prenom:s" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

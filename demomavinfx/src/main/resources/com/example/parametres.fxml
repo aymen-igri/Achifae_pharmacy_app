@@ -2,17 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="698.0" prefWidth="1280.0" style="-fx-background-color: #EDF0F4;" stylesheets="@parametres.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="106.0" prefWidth="1280.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="106.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
                <children>
@@ -24,12 +26,58 @@
                </children>
             </AnchorPane>
             <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
-            <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e1fcf8;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="38.0" layoutY="-86.0" prefHeight="221.0" prefWidth="1033.0" style="-fx-background-color: #025159;">
+               <children>
+                  <Label fx:id="fullName" layoutX="14.0" layoutY="21.0" prefHeight="40.0" prefWidth="196.0" text="Nom &amp; Prenom" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="id" layoutX="14.0" layoutY="52.0" text="ID:%d" textFill="#8c8c8c">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gender" layoutX="14.0" layoutY="88.0" prefHeight="27.0" prefWidth="374.0" text="Sexe:%d" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="contact" layoutX="14.0" layoutY="122.0" prefHeight="27.0" prefWidth="377.0" text="Contact:%d" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rolePh" layoutX="14.0" layoutY="157.0" prefHeight="27.0" prefWidth="375.0" text="Role:%d" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="967.0" layoutY="18.0" mnemonicParsing="false" onAction="#update" prefHeight="45.0" prefWidth="45.0" styleClass="update" />
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="977.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/update.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="parTable" layoutX="38.0" layoutY="152.0" prefHeight="405.0" prefWidth="1033.0">
+              <columns>
+                <TableColumn fx:id="id_ph" prefWidth="70.0" text="ID" />
+                <TableColumn fx:id="nom_ph" prefWidth="249.33331298828125" text="NOM" />
+                  <TableColumn fx:id="pre_ph" prefWidth="249.33331298828125" text="PRENOM" />
+                  <TableColumn fx:id="sexe" minWidth="0.0" prefWidth="174.0" text="SEXE" />
+                  <TableColumn fx:id="contact_ph" minWidth="0.0" prefWidth="174.0" text="CONTACT" />
+                  <TableColumn fx:id="role_ph" minWidth="0.0" prefWidth="114.6666259765625" text="POSTE" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
    </center>
    <left>
       <AnchorPane prefHeight="569.0" prefWidth="178.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
