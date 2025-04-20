@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,39 +10,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="687.0" style="-fx-background-color: #025159;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SignUp">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="687.0" style="-fx-background-color: #025159;" stylesheets="@signup.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.SignUp">
    <children>
-      <AnchorPane layoutX="38.0" layoutY="20.0" prefHeight="425.0" prefWidth="367.0" style="-fx-background-color: #009099; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);">
+      <AnchorPane layoutX="38.0" layoutY="37.0" prefHeight="392.0" prefWidth="367.0" style="-fx-background-color: #009099; -fx-background-radius: 5; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);">
          <children>
-            <TextField fx:id="nomph" layoutX="25.0" layoutY="59.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="144.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'inscrire" wrappingWidth="78.42576599121094">
+            <TextField fx:id="nomph" layoutX="25.0" layoutY="59.0" prefHeight="25.0" prefWidth="316.0" promptText="Nom" styleClass="input" />
+            <Text fill="WHITE" layoutX="137.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S'inscrire" wrappingWidth="91.53515625">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Text>
-            <Button fx:id="create" layoutX="209.0" layoutY="350.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="S'inscrire" textAlignment="CENTER">
+            <Button fx:id="create" layoutX="197.0" layoutY="333.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="33.0" prefWidth="117.0" styleClass="inscrire" text="S'inscrire" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button fx:id="retour" layoutX="42.0" layoutY="350.0" mnemonicParsing="false" onAction="#connection" prefHeight="33.0" prefWidth="117.0" style="-fx-background-color: #0D0D0D; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" text="j'ai un compte" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="retour" layoutX="51.0" layoutY="333.0" mnemonicParsing="false" onAction="#connection" prefHeight="33.0" prefWidth="117.0" styleClass="retoure" text="j'ai un compte" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="25.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom de pharmacien:" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sexe" />
-            <TextField fx:id="tele" layoutX="25.0" layoutY="188.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de telephone" />
-            <TextField fx:id="username" layoutX="25.0" layoutY="272.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur" />
-            <TextField fx:id="password" layoutX="25.0" layoutY="314.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" />
-            <TextField fx:id="role" layoutX="25.0" layoutY="230.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le role du pharmacien" />
-            <TextField fx:id="gender" layoutX="25.0" layoutY="145.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
-            <Text fill="WHITE" layoutX="25.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom de pharmacine" />
-            <TextField fx:id="prenph" layoutX="25.0" layoutY="101.0" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #04D9B2; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0, 4);" />
+            <TextField fx:id="tele" layoutX="25.0" layoutY="188.0" prefHeight="25.0" prefWidth="316.0" promptText="Numero de télephone" styleClass="input" />
+            <TextField fx:id="username" layoutX="25.0" layoutY="233.0" prefHeight="25.0" prefWidth="316.0" promptText="Nom d'utilisateur" styleClass="input" />
+            <TextField fx:id="prenph" layoutX="25.0" layoutY="101.0" prefHeight="25.0" prefWidth="316.0" promptText="Prenom" styleClass="input" />
+            <ComboBox fx:id="gender" layoutX="25.0" layoutY="145.0" prefHeight="25.0" prefWidth="316.0" promptText="Sexe" styleClass="sexe" />
+            <PasswordField fx:id="password" layoutX="25.0" layoutY="279.0" prefHeight="27.0" prefWidth="316.0" promptText="Mot de pass" styleClass="input" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="180.0" fitWidth="222.0" layoutX="443.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">

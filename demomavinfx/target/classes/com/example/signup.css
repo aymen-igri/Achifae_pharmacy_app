@@ -1,0 +1,36 @@
+.input,.sexe,.inscrire{
+    -fx-background-color: #04D9B2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-prompt-text-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
+}
+
+.retoure{
+    -fx-background-color: rgb(10, 10, 10);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4); 
+}
+
+.input:hover,.sexe:hover,.inscrire:hover{
+    -fx-background-color: #03e8be;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 4);
+    -fx-prompt-text-fill: #FFFFFF;
+}
+
+.retoure:hover{
+    -fx-background-color: black;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 4); 
+}
+
+.sexe .arrow {
+    -fx-background-color: #FFFFFF; /* Color of the dropdown arrow */
+}
+
+.sexe .list-cell {
+    -fx-background-color: #04D9B2; /* Background color of dropdown items */
+    -fx-text-fill: #FFFFFF; /* Text color of dropdown items */
+}
+
+.sexe .list-cell:hover {
+    -fx-background-color: #03e8be; /* Background color of dropdown items on hover */
+    -fx-text-fill: #FFFFFF; /* Text color of dropdown items on hover */
+}

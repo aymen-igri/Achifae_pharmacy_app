@@ -15,7 +15,7 @@
     -fx-background-color: #025159;
     -fx-background-radius:30px;
     -fx-border-radius:30px;
-    -fx-text-fill:white;
+    -fx-text-fill:white; 
 }
 
 .update:hover,.info:hover{
