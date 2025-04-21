@@ -106,7 +106,7 @@ public class ClientsAdd {
             cli.insert(urldb);
             System.out.println(cli.toString());
             
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
+            showAlert(AlertType.INFORMATION, "Inscription réussie", "le client ajouté avec succès", "");
 
             clients.refreshNbrMedLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -117,13 +117,13 @@ public class ClientsUpdate {
 
             if (!isNumeric(teleCli.getText()) || !isNumeric(teleCli.getText())) {
                 showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Le nbr de tele doit être des nombres", ""); 
+                         "Le tele doit être des nombres", ""); 
                 return;
             }
 
             System.out.println(cli.toString());
             cli.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + cli.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le client " + cli.getId() + " a été mis à jour", "");
             
             clients.refreshNbrMedLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

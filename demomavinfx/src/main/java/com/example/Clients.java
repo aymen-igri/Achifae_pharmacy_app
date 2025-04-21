@@ -97,7 +97,7 @@ public class Clients {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
                 this.cli = new Client();
                 nbrCli.setText("LISTE DES CLIENTS("+cli.count(urldb)+")");
 
