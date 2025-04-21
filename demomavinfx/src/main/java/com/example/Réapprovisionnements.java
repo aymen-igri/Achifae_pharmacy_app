@@ -94,7 +94,7 @@ public class Réapprovisionnements {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
                 this.rea=new Réapprovisionnement();
                 System.out.println(rea.count(urldb)); // Ensure parentheses are balanced
                 nbrRea.setText("LISTE DES REAPPRO.("+String.valueOf(rea.count(urldb))+")");

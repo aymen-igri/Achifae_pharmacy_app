@@ -106,8 +106,8 @@ public class RéapprovisionnementsAdd {
                 // If we get here, the insertion was successful
             System.out.println(rea.toString());
                 
-            showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été créée avec succès", 
-                          "La vente a été ajoutée à la base de données.");
+            showAlert(AlertType.INFORMATION, "une réapprovisionnement ajoutée", "La réapprovisionnement a été ajoutée avec succès", 
+                          "");
     
             reas.refreshNbrReaLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

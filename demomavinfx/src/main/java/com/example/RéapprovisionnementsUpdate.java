@@ -116,7 +116,7 @@ public class RéapprovisionnementsUpdate {
 
             System.out.println(rea.toString());
             rea.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + rea.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","La réapprovisionnement N:" + rea.getId() + " a été mis à jour", "");
             
             reas.refreshNbrReaLabel();
 
@@ -143,7 +143,7 @@ public class RéapprovisionnementsUpdate {
         try{
            
             rea.delete(urldb);
-            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente " + rea.getId() + " a été supprimée", "");
+            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","La réapprovisionnement N:" + rea.getId() + " a été supprimée", "");
             
             reas.refreshNbrReaLabel();
 
