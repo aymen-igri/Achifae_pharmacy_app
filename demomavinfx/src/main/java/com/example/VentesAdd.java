@@ -81,54 +81,68 @@ public class VentesAdd {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            idc=Integer.parseInt(idCli.getText());
-            idm=Integer.parseInt(idMed.getText());
-            quan=Integer.parseInt(quantité.getText());
-            pri=Integer.parseInt(prix.getText());
-            datev=dateVen.getValue().toString();
 
-            this.ven = new Vente();
-        
-            ven.setClientId(idc);
-            ven.setMedicamentId(idm);
-            ven.setPharmacienId(phID);
-            ven.setQuantity(quan);
-            ven.setTotalPrice(pri);
-            ven.setDate(datev);
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout de la vente");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir ajouter cette venter?");
 
-            try {
-                ven.insert(urldb);
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                    try{
+                    idc=Integer.parseInt(idCli.getText());
+                    idm=Integer.parseInt(idMed.getText());
+                    quan=Integer.parseInt(quantité.getText());
+                    pri=Integer.parseInt(prix.getText());
+                    datev=dateVen.getValue().toString();
+
+                    this.ven = new Vente();
                 
-                // If we get here, the insertion was successful
-                System.out.println(ven.toString());
-                
-                showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été ajoutée avec succès", 
-                          "");
-    
-                vens.refreshNbrVenLabel();
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.close();
-                
-            } catch (RuntimeException e) {
-                // Check if it was due to insufficient quantity
-                if (ven.hasInsufficientQuantity()) {
-                    showAlert(AlertType.ERROR, "Quantité insuffisante", 
-                             "Impossible d'ajouter' la vente - Quantité insuffisante", 
-                             "Quantité disponible: " + ven.getAvailableQuantity() + 
-                             "\nQuantité demandée: " + ven.getRequestedQuantity());
-                } else {
+                    ven.setClientId(idc);
+                    ven.setMedicamentId(idm);
+                    ven.setPharmacienId(phID);
+                    ven.setQuantity(quan);
+                    ven.setTotalPrice(pri);
+                    ven.setDate(datev);
+
+                    try {
+                        ven.insert(urldb);
+                        
+                        // If we get here, the insertion was successful
+                        System.out.println(ven.toString());
+                        
+                        showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été ajoutée avec succès", 
+                                "");
+            
+                        vens.refreshNbrVenLabel();
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.close();
+                        
+                    } catch (RuntimeException e) {
+                        // Check if it was due to insufficient quantity
+                        if (ven.hasInsufficientQuantity()) {
+                            showAlert(AlertType.ERROR, "Quantité insuffisante", 
+                                    "Impossible d'ajouter' la vente - Quantité insuffisante", 
+                                    "Quantité disponible: " + ven.getAvailableQuantity() + 
+                                    "\nQuantité demandée: " + ven.getRequestedQuantity());
+                        } else {
+                            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                        }
+                    }
+                } catch(NumberFormatException e) {
+                    showAlert(AlertType.ERROR, "Format invalide", "Veuillez entrer des valeurs numériques valides", 
+                            "Les champs ID client, ID médicament, quantité et prix doivent être des nombres.");
+                } catch(Exception e){
                     showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
                 }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
             }
-        } catch(NumberFormatException e) {
-            showAlert(AlertType.ERROR, "Format invalide", "Veuillez entrer des valeurs numériques valides", 
-                     "Les champs ID client, ID médicament, quantité et prix doivent être des nombres.");
-        } catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        });
+        
     }
 
     private void showAlert(AlertType alertType, String title, String header, String content) {

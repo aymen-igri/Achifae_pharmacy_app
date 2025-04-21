@@ -97,31 +97,43 @@ public class MedicamentsAdd {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            nom=nomMed.getText();
-            quantite=Integer.parseInt(quantiteMed.getText());
-            prix=Integer.parseInt(prixMed.getText());
-            fourniceur=fourniceurMed.getText();
-            dateExpiraiton=dateExpiraitonMed.getValue().toString();
-            type=typeComboBox.getValue();
 
-            m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout du medicament");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir ajouter ce medicament?");
 
-            m.insert(urldb);
-            System.out.println(m.toString());
-            
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    nom=nomMed.getText();
+                    quantite=Integer.parseInt(quantiteMed.getText());
+                    prix=Integer.parseInt(prixMed.getText());
+                    fourniceur=fourniceurMed.getText();
+                    dateExpiraiton=dateExpiraitonMed.getValue().toString();
+                    type=typeComboBox.getValue();
 
-            ms.refreshNbrMedLabel();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+                    m= new Medicament(nom,quantite,prix,dateExpiraiton,fourniceur,type);
 
+                    m.insert(urldb);
+                    System.out.println(m.toString());
+                    
+                    showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament ajouter avec succès", "vous devez maintenant se conecter avec ces information");
+
+                    ms.refreshNbrMedLabel();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
     }
 
     

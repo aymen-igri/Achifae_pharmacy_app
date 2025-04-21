@@ -112,31 +112,43 @@ public class OrdonnancesUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            ord.setClientId(Integer.parseInt(idCli.getText()));
-            ord.setMedicamentId(Integer.parseInt(idMed.getText()));
-            ord.setDoctorName(nomDoc.getText());
-            ord.setDoctorContact(contDoc.getText());
-            ord.setDate(dateOrd.getValue().toString());
-            ord.setExpirationDate(dateExp.getValue().toString());
-            ord.setStatus(typeComboBox.getValue());
 
-            System.out.println(ord.toString());
-            ord.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","L'ordonnance N:" + ord.getId() + " a été mis à jour", "");
-            
-            ords.refreshNbrOrdLabel();
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification de l'ordonnance");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier cette ordonnance?");
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-            ((Stage) idCli.getScene().getWindow()).close();
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                    try{
+                        ord.setClientId(Integer.parseInt(idCli.getText()));
+                        ord.setMedicamentId(Integer.parseInt(idMed.getText()));
+                        ord.setDoctorName(nomDoc.getText());
+                        ord.setDoctorContact(contDoc.getText());
+                        ord.setDate(dateOrd.getValue().toString());
+                        ord.setExpirationDate(dateExp.getValue().toString());
+                        ord.setStatus(typeComboBox.getValue());
 
+                        System.out.println(ord.toString());
+                        ord.update(urldb);
+                        showAlert(AlertType.INFORMATION, "Mise à jour réussie","L'ordonnance N:" + ord.getId() + " a été mis à jour", "");
+                        
+                        ords.refreshNbrOrdLabel();
+
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.close();
+                        
+                        ((Stage) idCli.getScene().getWindow()).close();
+                    }catch(Exception e){
+                        showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                        System.out.println(e.getMessage());
+                        e.printStackTrace();
+                    } 
+                } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });   
     }
 
     private void showAlert(AlertType alertType, String title, String header, String content) {

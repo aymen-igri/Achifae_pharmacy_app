@@ -107,33 +107,48 @@ public class ClientsUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            cli.setName(nomCli.getText());
-            cli.setLastN(prenCli.getText());
-            cli.setPhoneNumber(Integer.parseInt(teleCli.getText()));
-            cli.setEmail(emailCli.getText());
-            cli.setAddress(adresseCli.getText());
-            cli.setGender(typeComboBox.getValue());
 
-            if (!isNumeric(teleCli.getText()) || !isNumeric(teleCli.getText())) {
-                showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Le tele doit être des nombres", ""); 
-                return;
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout du client");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier les inforamtions de ce client?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                // User clicked OK, proceed with the operation
+                try{
+                    cli.setName(nomCli.getText());
+                    cli.setLastN(prenCli.getText());
+                    cli.setPhoneNumber(Integer.parseInt(teleCli.getText()));
+                    cli.setEmail(emailCli.getText());
+                    cli.setAddress(adresseCli.getText());
+                    cli.setGender(typeComboBox.getValue());
+        
+                    if (!isNumeric(teleCli.getText()) || !isNumeric(teleCli.getText())) {
+                        showAlert(AlertType.WARNING, "Valeurs invalides", 
+                                 "Le tele doit être des nombres", ""); 
+                        return;
+                    }
+        
+                    System.out.println(cli.toString());
+                    cli.update(urldb);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le client " + cli.getId() + " a été mis à jour", "");
+                    
+                    clients.refreshNbrMedLabel();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
             }
-
-            System.out.println(cli.toString());
-            cli.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le client " + cli.getId() + " a été mis à jour", "");
-            
-            clients.refreshNbrMedLabel();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        });
+        
 
     }
 

@@ -307,13 +307,22 @@ public class Medicaments {
     }
 
     public void logOut(ActionEvent event)throws Exception{
-        try{
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la deconnéxion");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir déconnecter?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+               try{
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/signin.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setFullScreenExitHint("");
             stage.setTitle("Connection");
+            stage.setMaximized(false);
+            stage.setResizable(false);
+            stage.sizeToScene();
             stage.centerOnScreen();
             stage.show();
         }catch(Exception e){
@@ -321,6 +330,12 @@ public class Medicaments {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
+        
     }
     
     private void showAlert(AlertType alertType, String title, String header, String content) {

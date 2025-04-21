@@ -98,34 +98,48 @@ public class VentesUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            Vente v = new Vente();
-            v.setPharmacienId(ph.getId());
-            v.setQuantity(Integer.parseInt(quantité.getText()));
-            v.setTotalPrice(Double.parseDouble(prix.getText()));
-            v.setDate(dateVen.getValue().toString());
 
-            if (!isNumeric(quantité.getText()) || !isNumeric(prix.getText())) {
-                showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Quantité et Prix doivent être des nombres", "");
-                return;
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification de la vente");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier ce vente?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    Vente v = new Vente();
+                    v.setPharmacienId(ph.getId());
+                    v.setQuantity(Integer.parseInt(quantité.getText()));
+                    v.setTotalPrice(Double.parseDouble(prix.getText()));
+                    v.setDate(dateVen.getValue().toString());
+
+                    if (!isNumeric(quantité.getText()) || !isNumeric(prix.getText())) {
+                        showAlert(AlertType.WARNING, "Valeurs invalides", 
+                                "Quantité et Prix doivent être des nombres", "");
+                        return;
+                    }
+
+                    System.out.println(v.toString());
+                    ven.update(urldb,v);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le vente N:" + ven.getId() + " a été mis à jour", "");
+                    
+                    vens.refreshNbrVenLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                    ((Stage) nomMed.getScene().getWindow()).close();
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
             }
-
-            System.out.println(v.toString());
-            ven.update(urldb,v);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le vente N:" + ven.getId() + " a été mis à jour", "");
-            
-            vens.refreshNbrVenLabel();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-            ((Stage) nomMed.getScene().getWindow()).close();
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        });
+        
 
     }
 
@@ -139,22 +153,35 @@ public class VentesUpdate {
     }
 
     public void supprimerVen(ActionEvent event){
-        try{
-           
-            ven.delete(urldb);
-            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente N:" + ven.getId() + " a été supprimée", "");
-            
-            vens.refreshNbrVenLabel();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-            ((Stage) nomMed.getScene().getWindow()).close();
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la deconnexion");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir deconnecter?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    ven.delete(urldb);
+                    showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente N:" + ven.getId() + " a été supprimée", "");
+                    
+                    vens.refreshNbrVenLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                    ((Stage) nomMed.getScene().getWindow()).close();
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
+        
     }
     
     private void showAlert(AlertType alertType, String title, String header, String content) {

@@ -86,37 +86,51 @@ public class RéapprovisionnementsAdd {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            idm=Integer.parseInt(idMed.getText());
-            quan=Integer.parseInt(quantité.getText());
-            stat=typeComboBox.getValue();
 
-            date=LocalDate.now().toString();
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout de la réapprovisionnement");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir ajouter ce réapprovisionnement?");
 
-            this.rea = new Réapprovisionnement();
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    idm=Integer.parseInt(idMed.getText());
+                    quan=Integer.parseInt(quantité.getText());
+                    stat=typeComboBox.getValue();
+
+                    date=LocalDate.now().toString();
+
+                    this.rea = new Réapprovisionnement();
+                
+                    rea.setMedicamentId(idm);
+                    rea.setPharmacienId(phID);
+                    rea.setQuantity(quan);
+                    rea.setStatus(stat);
+                    rea.setDate(date);
+
+                    rea.insert(urldb);
+                        
+                        // If we get here, the insertion was successful
+                    System.out.println(rea.toString());
+                        
+                    showAlert(AlertType.INFORMATION, "une réapprovisionnement ajoutée", "La réapprovisionnement a été ajoutée avec succès", 
+                                "");
+            
+                    reas.refreshNbrReaLabel();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                } catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
         
-            rea.setMedicamentId(idm);
-            rea.setPharmacienId(phID);
-            rea.setQuantity(quan);
-            rea.setStatus(stat);
-            rea.setDate(date);
-
-            rea.insert(urldb);
-                
-                // If we get here, the insertion was successful
-            System.out.println(rea.toString());
-                
-            showAlert(AlertType.INFORMATION, "une réapprovisionnement ajoutée", "La réapprovisionnement a été ajoutée avec succès", 
-                          "");
-    
-            reas.refreshNbrReaLabel();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-        } catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
     }
 
     private void showAlert(AlertType alertType, String title, String header, String content) {

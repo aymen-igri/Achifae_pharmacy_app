@@ -111,36 +111,48 @@ public class MedicamentsUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            m.setName(nomMed.getText());
-            m.setQuantity(Integer.parseInt(quantiteMed.getText()));
-            m.setPrice(Double.parseDouble(prixMed.getText()));
-            m.setSupplier(fourniceurMed.getText());
-            m.setExpirationDate(dateExpiraitonMed.getValue().toString());
-            m.setType(typeComboBox.getValue());
 
-            if (!isNumeric(quantiteMed.getText()) || !isNumeric(prixMed.getText())) {
-                showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Quantité et Prix doivent être des nombres", "");
-                return;
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification du medicament");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier ce medicament?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    m.setName(nomMed.getText());
+                    m.setQuantity(Integer.parseInt(quantiteMed.getText()));
+                    m.setPrice(Double.parseDouble(prixMed.getText()));
+                    m.setSupplier(fourniceurMed.getText());
+                    m.setExpirationDate(dateExpiraitonMed.getValue().toString());
+                    m.setType(typeComboBox.getValue());
+
+                    if (!isNumeric(quantiteMed.getText()) || !isNumeric(prixMed.getText())) {
+                        showAlert(AlertType.WARNING, "Valeurs invalides", 
+                                "Quantité et Prix doivent être des nombres", "");
+                        return;
+                    }
+
+                    System.out.println(m.toString());
+                    m.update(urldb);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + m.getId() + " a été mis à jour", "");
+                    
+                    ms.refreshNbrMedLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                    ((Stage) nomMed.getScene().getWindow()).close();
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
             }
-
-            System.out.println(m.toString());
-            m.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + m.getId() + " a été mis à jour", "");
-            
-            ms.refreshNbrMedLabel();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-            ((Stage) nomMed.getScene().getWindow()).close();
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
-
+        });
     }
  
     private boolean isNumeric(String str) {

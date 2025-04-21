@@ -102,32 +102,46 @@ public class RéapprovisionnementsUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            rea.setQuantity(Integer.parseInt(quantité.getText()));
-            rea.setDate(date.getValue().toString());
-            rea.setStatus(typeComboBox.getValue());
-            rea.setPharmacienId(ph.getId());
 
-            if (!isNumeric(quantité.getText())) {
-                showAlert(AlertType.WARNING, "Valeurs invalides", 
-                         "Quantité et Prix doivent être des nombres", "");
-                return;
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification de la réapprovisionnement");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier ce réapprovisionnement?");
+
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    rea.setQuantity(Integer.parseInt(quantité.getText()));
+                    rea.setDate(date.getValue().toString());
+                    rea.setStatus(typeComboBox.getValue());
+                    rea.setPharmacienId(ph.getId());
+
+                    if (!isNumeric(quantité.getText())) {
+                        showAlert(AlertType.WARNING, "Valeurs invalides", 
+                                "Quantité et Prix doivent être des nombres", "");
+                        return;
+                    }
+
+                    System.out.println(rea.toString());
+                    rea.update(urldb);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","La réapprovisionnement N:" + rea.getId() + " a été mis à jour", "");
+                    
+                    reas.refreshNbrReaLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
             }
-
-            System.out.println(rea.toString());
-            rea.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","La réapprovisionnement N:" + rea.getId() + " a été mis à jour", "");
-            
-            reas.refreshNbrReaLabel();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        });
+        
     }
 
     private boolean isNumeric(String str) {
@@ -140,22 +154,34 @@ public class RéapprovisionnementsUpdate {
     }
 
     public void supprimerRea(ActionEvent event){
-        try{
-           
-            rea.delete(urldb);
-            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","La réapprovisionnement N:" + rea.getId() + " a été supprimée", "");
-            
-            reas.refreshNbrReaLabel();
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la suppression de la réapprovisionnement");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir supprimer ce réapprovisionnement?");
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-            ((Stage) nomMed.getScene().getWindow()).close();
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    rea.delete(urldb);
+                    showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","La réapprovisionnement N:" + rea.getId() + " a été supprimée", "");
+                    
+                    reas.refreshNbrReaLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                    ((Stage) nomMed.getScene().getWindow()).close();
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
+         
     }
     
     private void showAlert(AlertType alertType, String title, String header, String content) {

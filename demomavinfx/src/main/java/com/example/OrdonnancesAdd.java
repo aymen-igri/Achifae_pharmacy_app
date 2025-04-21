@@ -99,40 +99,53 @@ public class OrdonnancesAdd {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            idc=Integer.parseInt(idCli.getText());
-            idm=Integer.parseInt(idMed.getText());
-            nomd=nomDoc.getText();
-            ctd=contDoc.getText();
-            datee=dateExp.getValue().toString();
-            dateo=dateOrd.getValue().toString();
-            etat=typeComboBox.getValue();
 
-            this.ord = new Ordonnance();
-            
-            ord.setClientId(idc);
-            ord.setMedicamentId(idm);
-            ord.setDoctorName(nomd);
-            ord.setDoctorContact(ctd);
-            ord.setDate(dateo);
-            ord.setExpirationDate(datee);
-            ord.setStatus(etat);
-            
-            ord.insert(urldb);
-            System.out.println(ord.toString());
-            
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le ordonnance ajouté avec succès", "");
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout de l'ordonnance");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir ajouter cette ordonnance?");
 
-            ords.refreshNbrOrdLabel();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    idc=Integer.parseInt(idCli.getText());
+                    idm=Integer.parseInt(idMed.getText());
+                    nomd=nomDoc.getText();
+                    ctd=contDoc.getText();
+                    datee=dateExp.getValue().toString();
+                    dateo=dateOrd.getValue().toString();
+                    etat=typeComboBox.getValue();
 
+                    this.ord = new Ordonnance();
+                    
+                    ord.setClientId(idc);
+                    ord.setMedicamentId(idm);
+                    ord.setDoctorName(nomd);
+                    ord.setDoctorContact(ctd);
+                    ord.setDate(dateo);
+                    ord.setExpirationDate(datee);
+                    ord.setStatus(etat);
+                    
+                    ord.insert(urldb);
+                    System.out.println(ord.toString());
+                    
+                    showAlert(AlertType.INFORMATION, "Inscription réussie", "le ordonnance ajouté avec succès", "");
+
+                    ords.refreshNbrOrdLabel();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
+        
     }
     
     private void showAlert(AlertType alertType, String title, String header, String content) {

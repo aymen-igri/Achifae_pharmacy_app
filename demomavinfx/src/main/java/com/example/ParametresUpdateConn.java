@@ -68,22 +68,36 @@ public class ParametresUpdateConn {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            ph.setUsername(username.getText());
-            ph.setPassword(password.getText());
 
-            System.out.println(ph.toString());
-            ph.updateC(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Vous avez changé les inforamtion de connection de votre compte", "");
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification des informations de connexion");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier les informations de connexion?");
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    ph.setUsername(username.getText());
+                    ph.setPassword(password.getText());
+
+                    System.out.println(ph.toString());
+                    ph.updateC(urldb);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","Vous avez changé les inforamtion de connection de votre compte", "");
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                } 
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
+        
     }
 
     public void supprimerPh(ActionEvent event){

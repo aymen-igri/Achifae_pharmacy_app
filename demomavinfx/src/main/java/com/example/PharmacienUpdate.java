@@ -90,24 +90,36 @@ public class PharmacienUpdate {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            ph.setRole(typeComboBox.getValue());
 
-            System.out.println(ph.toString());
-            ph.updateR(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Les informations du pharmatien N:" + ph.getId() + " ont été mis à jour", "");
-            
-            pr.refreshNbrParLabel();
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer la modification");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir modifier les informations de ce pharmacien?");
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                try{
+                    ph.setRole(typeComboBox.getValue());
 
+                    System.out.println(ph.toString());
+                    ph.updateR(urldb);
+                    showAlert(AlertType.INFORMATION, "Mise à jour réussie","Les informations du pharmatien N:" + ph.getId() + " ont été mis à jour", "");
+                    
+                    pr.refreshNbrParLabel();
+
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                }catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        });
     }
 
     private void showAlert(AlertType alertType, String title, String header, String content) {
