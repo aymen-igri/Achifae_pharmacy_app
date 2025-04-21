@@ -100,7 +100,7 @@ public class Ventes {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
                 this.ven=new Vente();
                 nbrVen.setText("LISTE DES VENTES("+String.valueOf(ven.count(urldb))+")");
                 initialize(null, null);

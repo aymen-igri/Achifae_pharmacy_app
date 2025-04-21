@@ -68,7 +68,7 @@ public class VentesUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier une vente");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -113,7 +113,7 @@ public class VentesUpdate {
 
             System.out.println(v.toString());
             ven.update(urldb,v);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le vente " + ven.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le vente N:" + ven.getId() + " a été mis à jour", "");
             
             vens.refreshNbrVenLabel();
 
@@ -142,7 +142,7 @@ public class VentesUpdate {
         try{
            
             ven.delete(urldb);
-            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente " + ven.getId() + " a été supprimée", "");
+            showAlert(AlertType.INFORMATION, "La suppresion se fait avec succes","Le vente N:" + ven.getId() + " a été supprimée", "");
             
             vens.refreshNbrVenLabel();
 

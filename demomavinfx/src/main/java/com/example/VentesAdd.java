@@ -103,8 +103,8 @@ public class VentesAdd {
                 // If we get here, the insertion was successful
                 System.out.println(ven.toString());
                 
-                showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été créée avec succès", 
-                          "La vente a été ajoutée à la base de données.");
+                showAlert(AlertType.INFORMATION, "Vente réussie", "La vente a été ajoutée avec succès", 
+                          "");
     
                 vens.refreshNbrVenLabel();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -114,7 +114,7 @@ public class VentesAdd {
                 // Check if it was due to insufficient quantity
                 if (ven.hasInsufficientQuantity()) {
                     showAlert(AlertType.ERROR, "Quantité insuffisante", 
-                             "Impossible de créer la vente - Quantité insuffisante", 
+                             "Impossible d'ajouter' la vente - Quantité insuffisante", 
                              "Quantité disponible: " + ven.getAvailableQuantity() + 
                              "\nQuantité demandée: " + ven.getRequestedQuantity());
                 } else {
