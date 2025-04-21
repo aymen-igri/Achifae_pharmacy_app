@@ -82,12 +82,12 @@ public class Parametres {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
 
-                rolePh.setText("Role: "+ph.getRole());
+                rolePh.setText("Poste : "+ph.getRole());
                 fullName.setText(ph.getName()+" "+ph.getLastN());
                 id.setText("ID: "+ph.getId());
-                gender.setText("Sexe: "+ph.getGender());
+                gender.setText("Genre: "+ph.getGender());
                 contact.setText("Contact: "+ph.getContact());
 
                 if(ph.getRole().equals("Admin")){
@@ -145,11 +145,11 @@ public class Parametres {
     public void refreshNbrParLabel() {
         try {
             name.setText("Nom: " + ph.getLastN());
-            role.setText("Rôle: " + ph.getRole());
-            rolePh.setText("Role: "+ph.getRole());
+            role.setText("Poste: " + ph.getRole());
+            rolePh.setText("Poste: "+ph.getRole());
             fullName.setText(ph.getName()+" "+ph.getLastN());
             id.setText("ID: "+ph.getId());
-            gender.setText("Sexe: "+ph.getGender());
+            gender.setText("Genre: "+ph.getGender());
             contact.setText("Contact: "+ph.getContact());
             loadMedicamentsData();
         } catch (Exception e) {

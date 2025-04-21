@@ -27,3 +27,152 @@
 .window{
     -fx-background-color: #025159;
 }
+
+.add_text, .add_select, .add_button,.add_date{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 4);
+}
+
+.add_button{
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 4);
+}
+
+.add_date .text-field{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 4);
+}
+
+.add_text,.add_select,.add_button{
+    -fx-background-color: #04D9B2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 4);
+    -fx-prompt-text-fill: #FFFFFF;
+    -fx-text-fill: #FFFFFF;
+}
+
+.add_button:hover,.add_text:hover,.add_date:hover,.add_select:hover{
+    -fx-background-color: #03e8be;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 4);
+    -fx-prompt-text-fill: #FFFFFF;
+}
+
+.add_select .arrow {
+    -fx-background-color: #FFFFFF; /* Color of the dropdown arrow */
+}
+
+.add_select .list-cell {
+    -fx-background-color: #04D9B2; /* Background color of dropdown items */
+    -fx-text-fill: #FFFFFF; /* Text color of dropdown items */
+}
+
+.add_select .list-cell:hover {
+    -fx-background-color: #03e8be; /* Background color of dropdown items on hover */
+    -fx-text-fill: #FFFFFF; /* Text color of dropdown items on hover */
+}
+
+/* DatePicker styles */
+.date-picker {
+    -fx-background-color: #025159;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #025159;
+    -fx-background-radius: 0;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #04D9B2;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+.date-picker .cell {
+    -fx-background-color: white;
+    -fx-text-fill: #025159;
+}
+
+.date-picker .cell:hover {
+    -fx-background-color: #04D9B2;
+    -fx-text-fill: white;
+}
+
+.date-picker .cell:focused {
+    -fx-background-color: #04D9B2;
+    -fx-text-fill: white;
+}
+
+.date-picker .selected {
+    -fx-background-color: #04D9B2;
+    -fx-text-fill: white;
+}
+
+.date-picker .selected:focused {
+    -fx-background-color: #04D9B2;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup {
+    -fx-background-color: white;
+    -fx-border-color: #025159;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #025159;
+}
+
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .spinner .button {
+    -fx-background-color: #025159;
+}
+
+.date-picker-popup .spinner .button:hover {
+    -fx-background-color: #04D9B2;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+    -fx-background-color: white;
+}
+
+.table-view {
+    -fx-background-color: #FFFFFF; /* Background color of the table */
+    -fx-border-color: #025159; /* Border color */
+ /* Rounded corners for the background */
+    -fx-table-cell-border-color: #025159; /* Border color between cells *//* Padding inside the table */
+}
+
+.table-view .column-header {
+    -fx-background-color: #025159; /* Background color of the header */ /* Center-align the header text */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #04D9B2; /* Background color of selected row */
+    -fx-text-fill: #FFFFFF; /* Text color of selected row */
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER; /* Center-align the text in cells */
+    -fx-padding: 5px; /* Padding inside cells */
+}
+
+.scroll-bar {
+    -fx-background-color: #E0E0E0; /* Background color of the scrollbar */
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #CCCCCC; /* Color of the scrollbar thumb */
+    -fx-background-radius: 5px; /* Rounded corners for the scrollbar thumb */
+}
+
+
+.profile:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 0, 4);
+}

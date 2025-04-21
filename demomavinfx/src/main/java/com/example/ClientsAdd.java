@@ -93,30 +93,44 @@ public class ClientsAdd {
             showAlert(AlertType.WARNING, "Champs vides", "Veuillez remplir tous les champs", "Tous les champs doivent être remplis.");
             return;
         }
-        try{
-            nom=nomcli.getText();
-            prenom=prencli.getText();
-            sexe=typeComboBox.getValue();
-            tele=Integer.parseInt(telecli.getText());
-            email=emailcli.getText();
-            adresse=adressecli.getText();
 
-            cli = new Client(nom,prenom,sexe,tele,email,adresse); 
+        Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmation");
+        confirmAlert.setHeaderText("Confirmer l'ajout du client");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir ajouter ce client?");
 
-            cli.insert(urldb);
-            System.out.println(cli.toString());
-            
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le client ajouté avec succès", "");
-
-            clients.refreshNbrMedLabel();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.close();
-            
-        }catch(Exception e){
-            showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } 
+        confirmAlert.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.OK) {
+                // User clicked OK, proceed with the operation
+                try{
+                    nom = nomcli.getText();
+                    prenom = prencli.getText();
+                    sexe = typeComboBox.getValue();
+                    tele = Integer.parseInt(telecli.getText());
+                    email = emailcli.getText();
+                    adresse = adressecli.getText();
+    
+                    cli = new Client(nom, prenom, sexe, tele, email, adresse); 
+    
+                    cli.insert(urldb);
+                    System.out.println(cli.toString());
+                    
+                    showAlert(AlertType.INFORMATION, "Inscription réussie", "Le client a été ajouté avec succès", "");
+    
+                    clients.refreshNbrMedLabel();
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.close();
+                    
+                } catch(Exception e){
+                    showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());
+                    System.out.println(e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                // User clicked Cancel, do nothing
+                System.out.println("Operation canceled by user");
+            }
+        }); 
 
     }
 

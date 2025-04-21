@@ -11,7 +11,7 @@
    <children>
       <TextField fx:id="nomCli" layoutX="55.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Nom" styleClass="add_text" />
       <TextField fx:id="teleCli" layoutX="55.0" layoutY="150.0" prefHeight="25.0" prefWidth="261.0" promptText="Tele" styleClass="add_text" />
-      <ComboBox fx:id="typeComboBox" layoutX="55.0" layoutY="99.0" prefHeight="25.0" prefWidth="261.0" promptText="sexe" styleClass="add_select" />
+      <ComboBox fx:id="typeComboBox" layoutX="55.0" layoutY="99.0" prefHeight="25.0" prefWidth="261.0" promptText="Genre" styleClass="add_select" />
       <Button layoutX="156.0" layoutY="300.0" mnemonicParsing="false" onAction="#modifiercli" styleClass="add_button" text="Modifier" />
       <TextField fx:id="prenCli" layoutX="190.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Prenom" styleClass="add_text" />
       <TextField fx:id="emailCli" layoutX="55.0" layoutY="200.0" prefHeight="25.0" prefWidth="261.0" promptText="Email" styleClass="add_text" />

@@ -96,7 +96,7 @@ public class ParametresUpdateInfo {
 
             System.out.println(ph.toString());
             ph.updateIP(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + ph.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Vous avez changez vos information personelle", "");
             
             p.refreshNbrParLabel();
 

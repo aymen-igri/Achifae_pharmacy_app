@@ -47,7 +47,7 @@ public class ParametresUpdateConn {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier les informations de connexion");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -74,7 +74,7 @@ public class ParametresUpdateConn {
 
             System.out.println(ph.toString());
             ph.updateC(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + ph.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Vous avez changé les inforamtion de connection de votre compte", "");
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();

@@ -16,7 +16,7 @@
    <top>
       <AnchorPane prefHeight="106.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
+            <AnchorPane layoutX="-1.0" prefHeight="121.0" prefWidth="179.0" style="-fx-background-color: #025159;">
                <children>
                   <ImageView fitHeight="91.0" fitWidth="116.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -32,7 +32,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="38.0" layoutY="-86.0" prefHeight="221.0" prefWidth="1033.0" style="-fx-background-color: #025159;">
+            <AnchorPane layoutX="38.0" layoutY="-86.0" prefHeight="221.0" prefWidth="1033.0" style="-fx-background-color: #025159;" styleClass="profile">
                <children>
                   <Label fx:id="fullName" layoutX="14.0" layoutY="21.0" prefHeight="40.0" prefWidth="196.0" text="Nom &amp; Prenom" textFill="WHITE">
                      <font>
@@ -44,7 +44,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="gender" layoutX="14.0" layoutY="88.0" prefHeight="27.0" prefWidth="374.0" text="Sexe:%d" textFill="WHITE">
+                  <Label fx:id="gender" layoutX="14.0" layoutY="88.0" prefHeight="27.0" prefWidth="374.0" text="Genre:%d" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -72,7 +72,7 @@
                 <TableColumn fx:id="id_ph" prefWidth="70.0" text="ID" />
                 <TableColumn fx:id="nom_ph" prefWidth="249.33331298828125" text="NOM" />
                   <TableColumn fx:id="pre_ph" prefWidth="249.33331298828125" text="PRENOM" />
-                  <TableColumn fx:id="sexe" minWidth="0.0" prefWidth="174.0" text="SEXE" />
+                  <TableColumn fx:id="sexe" minWidth="0.0" prefWidth="174.0" text="Genre" />
                   <TableColumn fx:id="contact_ph" minWidth="0.0" prefWidth="174.0" text="CONTACT" />
                   <TableColumn fx:id="role_ph" minWidth="0.0" prefWidth="114.6666259765625" text="POSTE" />
               </columns>
@@ -82,9 +82,9 @@
    <left>
       <AnchorPane prefHeight="569.0" prefWidth="178.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="176.0">
+            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="177.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/940-9406687_already-a-proact-user-employee-icon-white-png.png" />
                      </image>
@@ -140,8 +140,8 @@
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="35.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tableau de bord" />
-            <Label fx:id="name" layoutX="67.0" layoutY="12.0" text="Label" textFill="WHITE" />
-            <Label fx:id="role" layoutX="67.0" layoutY="33.0" text="role" textFill="WHITE" />
+            <Label fx:id="name" layoutX="67.0" layoutY="20.0" text="nom" textFill="WHITE" />
+            <Label fx:id="role" layoutX="67.0" layoutY="40.0" text="poste" textFill="WHITE" />
             <Button layoutY="531.0" mnemonicParsing="false" onAction="#logOut" prefHeight="45.0" prefWidth="178.0" styleClass="logout" />
             <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="5.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
                <image>

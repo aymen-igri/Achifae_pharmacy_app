@@ -75,7 +75,7 @@
                   <TableColumn fx:id="id_c" prefWidth="70.66670227050781" text="ID" />
                   <TableColumn fx:id="nom_c" prefWidth="121.33331298828125" text="NOM" />
                   <TableColumn fx:id="pren_c" prefWidth="121.33331298828125" text="PRENOM" />
-                  <TableColumn fx:id="sexe_c" prefWidth="102.6666259765625" text="SEXE" />
+                  <TableColumn fx:id="sexe_c" prefWidth="102.6666259765625" text="Genre" />
                   <TableColumn fx:id="tele_c" prefWidth="132.66668701171875" text="TELE" />
                   <TableColumn fx:id="email_c" prefWidth="218.6666259765625" text="EMAIL" />
                   <TableColumn fx:id="adresse_c" minWidth="0.0" prefWidth="237.33331298828125" text="ADRESSE" />

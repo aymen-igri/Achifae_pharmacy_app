@@ -59,7 +59,7 @@ public class PharmacienUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier les inforamtions d'un pharmacien");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -95,7 +95,7 @@ public class PharmacienUpdate {
 
             System.out.println(ph.toString());
             ph.updateR(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + ph.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Les informations du pharmatien N:" + ph.getId() + " ont été mis à jour", "");
             
             pr.refreshNbrParLabel();
 

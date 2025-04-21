@@ -41,7 +41,7 @@ public class ParametresUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();

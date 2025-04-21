@@ -14,8 +14,8 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="154.0" layoutY="154.0" mnemonicParsing="false" onAction="#modifierPhC" prefHeight="34.0" prefWidth="64.0" styleClass="info" text="Modifier" />
+      <Button layoutX="154.0" layoutY="154.0" mnemonicParsing="false" onAction="#modifierPhC" prefHeight="34.0" prefWidth="64.0" styleClass="add_button" text="Modifier" />
       <TextField fx:id="username" layoutX="74.0" layoutY="60.0" prefHeight="25.0" prefWidth="223.0" promptText="Nom d'utilisateur" styleClass="add_text" />
-      <PasswordField fx:id="password" layoutX="74.0" layoutY="110.0" prefHeight="25.0" prefWidth="223.0" promptText="Mot de pass" />
+      <PasswordField fx:id="password" layoutX="74.0" layoutY="110.0" prefHeight="25.0" prefWidth="223.0" promptText="Mot de pass" styleClass="add_text" />
    </children>
 </AnchorPane>

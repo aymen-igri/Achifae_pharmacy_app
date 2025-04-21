@@ -14,10 +14,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Button layoutX="154.0" layoutY="154.0" mnemonicParsing="false" onAction="#modifierPhP" prefHeight="34.0" prefWidth="64.0" styleClass="info" text="Modifier" />
+      <Button layoutX="154.0" layoutY="154.0" mnemonicParsing="false" onAction="#modifierPhP" prefHeight="34.0" prefWidth="64.0" styleClass="add_button" text="Modifier" />
       <TextField fx:id="nom" layoutX="47.0" layoutY="61.0" prefHeight="25.0" prefWidth="126.0" promptText="Nom" styleClass="add_text" />
       <TextField fx:id="prenom" layoutX="206.0" layoutY="61.0" prefHeight="25.0" prefWidth="126.0" promptText="Prenom" styleClass="add_text" />
       <TextField fx:id="contact" layoutX="206.0" layoutY="106.0" prefHeight="25.0" prefWidth="126.0" promptText="Contact" styleClass="add_text" />
-      <ComboBox fx:id="sexe" layoutX="47.0" layoutY="106.0" prefHeight="25.0" prefWidth="126.0" promptText="Sexe" />
+      <ComboBox fx:id="sexe" layoutX="47.0" layoutY="106.0" prefHeight="25.0" prefWidth="126.0" promptText="Genre" styleClass="add_select" />
    </children>
 </AnchorPane>
