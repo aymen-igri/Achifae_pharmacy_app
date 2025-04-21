@@ -108,7 +108,7 @@ public class Ordonnances {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
                 this.ord = new Ordonnance();
                 nbrOrd.setText("LISTE DES ORDONNANCES("+String.valueOf(ord.count(urldb))+")");
                 initialize(null, null);

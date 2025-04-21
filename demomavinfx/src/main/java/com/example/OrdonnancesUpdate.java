@@ -76,7 +76,7 @@ public class OrdonnancesUpdate {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Modifier un médicament");
+                stage.setTitle("Modifier une ordonnance");
                 stage.setFullScreen(false);
                 stage.getIcons().add(icon);
                 stage.centerOnScreen();
@@ -123,7 +123,7 @@ public class OrdonnancesUpdate {
 
             System.out.println(ord.toString());
             ord.update(urldb);
-            showAlert(AlertType.INFORMATION, "Mise à jour réussie","Le médicament " + ord.getId() + " a été mis à jour", "");
+            showAlert(AlertType.INFORMATION, "Mise à jour réussie","L'ordonnance N:" + ord.getId() + " a été mis à jour", "");
             
             ords.refreshNbrOrdLabel();
 

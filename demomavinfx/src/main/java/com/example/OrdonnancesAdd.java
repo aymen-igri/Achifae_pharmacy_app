@@ -121,7 +121,7 @@ public class OrdonnancesAdd {
             ord.insert(urldb);
             System.out.println(ord.toString());
             
-            showAlert(AlertType.INFORMATION, "Inscription réussie", "le medicament créé avec succès", "vous devez maintenant se conecter avec ces information");
+            showAlert(AlertType.INFORMATION, "Inscription réussie", "le ordonnance ajouté avec succès", "");
 
             ords.refreshNbrOrdLabel();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
