@@ -39,7 +39,6 @@
 .chart-plot-background {
     -fx-background-color: transparent;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0, 0, 4); 
-
 }
 
 .chart-vertical-grid-lines {
@@ -101,4 +100,7 @@
 .chart-legend-item {
     -fx-text-fill: #025159;
     -fx-font-size: 14px;
+}
+.graph:hover{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 4); 
 }

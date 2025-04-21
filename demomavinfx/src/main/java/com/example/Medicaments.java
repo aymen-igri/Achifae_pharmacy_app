@@ -103,7 +103,7 @@ public class Medicaments {
                 Parent root = loader.load();
 
                 name.setText("Nom: " + ph.getLastN());
-                role.setText("Rôle: " + ph.getRole());
+                role.setText("Poste: " + ph.getRole());
                 this.med=new Medicament();
                 nbrMed.setText("LISTE DES MÉDICAMENTS("+String.valueOf(med.count(urldb))+")");
 

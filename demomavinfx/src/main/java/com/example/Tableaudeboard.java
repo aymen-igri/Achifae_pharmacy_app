@@ -99,7 +99,7 @@ public class Tableaudeboard {
             Parent root = loader.load();
 
             name.setText("Nom: "+ph.getLastN());
-            role.setText("Rôle: " + ph.getRole());
+            role.setText("Poste: " + ph.getRole());
             bienvenue.setText("Bienvenue " + ph.getName()+" "+ph.getLastN());
             nbrMed.setText(String.valueOf(med.count(URL)));
             nbrCli.setText(String.valueOf(cli.count(URL)));
@@ -117,7 +117,7 @@ public class Tableaudeboard {
             stage.setFullScreenExitHint("");
             stage.setTitle("Tabeau de board");
             stage.setFullScreen(false);
-            stage.centerOnScreen();
+            stage.setMaximized(true);
             stage.show();
         }catch(Exception e){
             showAlert(AlertType.ERROR, "Erreur", "Une erreur s'est produite", "Détails: " + e.getMessage());

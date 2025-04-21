@@ -19,20 +19,20 @@
    <top>
       <AnchorPane prefHeight="106.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
+            <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="178.0" style="-fx-background-color: #025159;">
                <children>
                   <ImageView fitHeight="91.0" fitWidth="116.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/oooo-removebg-preview%20(2).png" />
                      </image>
                   </ImageView>
+                  <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="119.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
                </children>
             </AnchorPane>
-            <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
             <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
-            <Label fx:id="bienvenue" layoutX="222.0" layoutY="26.0" text="Bienvenue message">
+            <Label fx:id="bienvenue" layoutX="237.0" layoutY="19.0" prefHeight="81.0" prefWidth="462.0" text="Bienvenue message">
                <font>
-                  <Font size="48.0" />
+                  <Font name="Arial Bold" size="48.0" />
                </font>
             </Label>
          </children>
@@ -98,6 +98,14 @@
                   </Text>
                </children>
             </AnchorPane>
+            <LineChart fx:id="lineChart" layoutX="633.0" layoutY="206.0" prefHeight="356.0" prefWidth="413.0" styleClass="graph">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT" />
+              </yAxis>
+            </LineChart>
             <AnchorPane layoutX="858.0" layoutY="29.0" prefHeight="149.0" prefWidth="181.0" styleClass="dashinfo">
                <children>
                   <ImageView fitHeight="49.0" fitWidth="41.0" layoutX="70.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -117,15 +125,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <LineChart fx:id="lineChart" layoutX="633.0" layoutY="206.0" prefHeight="356.0" prefWidth="413.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis fx:id="yAxis" side="LEFT" />
-              </yAxis>
-            </LineChart>
-            <BarChart fx:id="barChart" layoutX="45.0" layoutY="206.0" prefHeight="356.0" prefWidth="599.0">
+            <BarChart fx:id="barChart" layoutX="45.0" layoutY="206.0" prefHeight="356.0" prefWidth="599.0" styleClass="graph">
               <xAxis>
                 <CategoryAxis fx:id="barXAxis" side="BOTTOM" />
               </xAxis>
@@ -137,7 +137,7 @@
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="569.0" prefWidth="178.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="569.0" prefWidth="177.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
          <children>
             <Button layoutY="125.0" mnemonicParsing="false" onAction="#openMed" prefHeight="45.0" prefWidth="178.0" styleClass="med" />
             <ImageView fitHeight="28.0" fitWidth="24.0" layoutX="5.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
@@ -195,15 +195,15 @@
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="35.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se déconnecter" />
-            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="176.0">
+            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="177.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/940-9406687_already-a-proact-user-employee-icon-white-png.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="name" layoutX="67.0" layoutY="12.0" text="Label" textFill="WHITE" />
-                  <Label fx:id="role" layoutX="67.0" layoutY="33.0" text="role" textFill="WHITE" />
+                  <Label fx:id="name" layoutX="67.0" layoutY="20.0" text="nom" textFill="WHITE" />
+                  <Label fx:id="role" layoutX="67.0" layoutY="40.0" text="post" textFill="WHITE" />
                </children>
             </AnchorPane>
          </children>

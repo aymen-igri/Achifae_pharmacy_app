@@ -20,7 +20,7 @@
       <AnchorPane prefHeight="121.0" prefWidth="1274.0" BorderPane.alignment="CENTER">
          
          <children>
-            <AnchorPane layoutX="-1.0" prefHeight="119.0" prefWidth="179.0" style="-fx-background-color: #025159;">
+            <AnchorPane layoutX="-1.0" prefHeight="121.0" prefWidth="179.0" style="-fx-background-color: #025159;">
                <children>
                   <ImageView fitHeight="91.0" fitWidth="116.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -29,7 +29,6 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Line endX="164.3333282470703" endY="1.3333358764648438" layoutX="14.0" layoutY="118.0" startX="-13.999995231628418" startY="1.3333206176757812" stroke="WHITE" />
             <Label fx:id="nbrMed" layoutX="228.0" layoutY="7.0" prefHeight="105.0" prefWidth="711.0" text="LIST DES MEDICAMENTS (%d)">
                <font>
                   <Font name="Arial Bold" size="48.0" />
@@ -48,7 +47,7 @@
          <children>
             <AnchorPane layoutX="295.0" layoutY="262.0" prefHeight="45.0" prefWidth="176.0" />
             <ImageView fitHeight="34.0" fitWidth="37.0" layoutX="-48.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" />
-            <TableView fx:id="medTable" layoutX="44.0" layoutY="72.0" prefHeight="462.0" prefWidth="1008.0">
+            <TableView fx:id="medTable" layoutX="44.0" layoutY="72.0" prefHeight="462.0" prefWidth="1008.0" styleClass="table-view">
               <columns>
                 <TableColumn fx:id="id_c" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="nom_c" prefWidth="250.0" text="NOM" />
@@ -75,7 +74,7 @@
                </font>
             </TextField>
             <DatePicker fx:id="searchDateField" layoutX="490.0" layoutY="17.0" prefHeight="39.0" prefWidth="175.0" promptText="Date d'expiration" styleClass="search_date" />
-            <TextField fx:id="searchFournisseurField" layoutX="685.0" layoutY="17.0" prefHeight="39.0" prefWidth="185.0" promptText="Forniceur" styleClass="search_text">
+            <TextField fx:id="searchFournisseurField" layoutX="685.0" layoutY="17.0" prefHeight="39.0" prefWidth="185.0" promptText="Fournisseur" styleClass="search_text">
                <font>
                   <Font size="14.0" />
                </font>
@@ -85,16 +84,17 @@
       </AnchorPane>
    </center>
    <left>
-      <AnchorPane prefHeight="569.0" prefWidth="178.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="577.0" prefWidth="160.0" style="-fx-background-color: #025159;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="176.0">
+            <AnchorPane layoutX="1.0" prefHeight="81.0" prefWidth="177.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/940-9406687_already-a-proact-user-employee-icon-white-png.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="role" layoutX="67.0" layoutY="33.0" text="role" textFill="WHITE" />
+                  <Label fx:id="role" layoutX="67.0" layoutY="40.0" text="post" textFill="WHITE" />
+                  <Line endX="118.33334350585938" endY="2.00000262260437" layoutX="58.0" layoutY="-3.0" startX="-61.0" startY="2.00000262260437" stroke="WHITE" />
                </children>
             </AnchorPane>
             <Button layoutY="125.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" styleClass="med" />
@@ -146,7 +146,7 @@
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="35.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tableau de bord" />
-            <Label fx:id="name" layoutX="67.0" layoutY="12.0" text="Label" textFill="WHITE" />
+            <Label fx:id="name" layoutX="68.0" layoutY="20.0" text="nom" textFill="WHITE" />
             <Button layoutY="531.0" mnemonicParsing="false" onAction="#logOut" prefHeight="45.0" prefWidth="178.0" styleClass="logout" />
             <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="5.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
                <image>
