@@ -86,8 +86,8 @@ public class SignUp {
             return;
         }
 
-        nameValue = nomph.getText();
-        lastnValue = prenph.getText();
+        lastnValue= nomph.getText();
+        nameValue = prenph.getText();
         genderValue = gender.getValue();
         roleValue = "Stagiere";
         contValue = tele.getText();

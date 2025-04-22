@@ -12,12 +12,12 @@ import javafx.collections.ObservableList;
 public class Client extends Utilisateur implements Operations{
 
     // les information du client
-    private int phoneNumber_cli;
+    private String phoneNumber_cli;
     private String email_cli;
     private String address_cli;
 
     // Constructeur
-    public Client(String name,String lastn, String gender, int phoneNumber, String email, String address) {
+    public Client(String name,String lastn, String gender, String phoneNumber, String email, String address) {
         super(name,lastn, gender);
         this.phoneNumber_cli = phoneNumber;
         this.email_cli = email;
@@ -26,7 +26,7 @@ public class Client extends Utilisateur implements Operations{
 
     public Client() {
         super("","","");
-        this.phoneNumber_cli =0;
+        this.phoneNumber_cli ="";
         this.email_cli = "";
         this.address_cli = "";
     }
@@ -36,7 +36,7 @@ public class Client extends Utilisateur implements Operations{
     public String getName() {return super.getName();}
     public String getLastN() {return super.getLastN();}
     public String getGender() {return super.getGender();}
-    public int getPhoneNumber() {return phoneNumber_cli;}
+    public String getPhoneNumber() {return phoneNumber_cli;}
     public String getEmail() {return email_cli;}
     public String getAddress() {return address_cli;}
     
@@ -45,7 +45,7 @@ public class Client extends Utilisateur implements Operations{
     public void setName(String name) {super.setName(name);}
     public void setLastN(String lastn) {super.setLastN(lastn);}
     public void setGender(String gender) {super.setGender(gender);}
-    public void setPhoneNumber(int phoneNumber) {this.phoneNumber_cli = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber_cli = phoneNumber;}
     public void setEmail(String email) {this.email_cli = email;}
     public void setAddress(String address) {this.address_cli = address;}
 
@@ -65,7 +65,7 @@ public class Client extends Utilisateur implements Operations{
 
             pstmt.setString(2, getName());
             pstmt.setString(3, getGender());
-            pstmt.setInt(4, getPhoneNumber());
+            pstmt.setString(4, getPhoneNumber());
             pstmt.setString(5, getEmail());
             pstmt.setString(6, getAddress());
             pstmt.setString(7, getLastN());
@@ -114,7 +114,7 @@ public class Client extends Utilisateur implements Operations{
                     rs.getString("nom_cli"),
                     rs.getString("pre_cli"),
                     rs.getString("sexe_cli"),
-                    rs.getInt("num_cli"),
+                    rs.getString("num_cli"),
                     rs.getString("email_cli"),
                     rs.getString("addre_cli")
                 );
@@ -142,7 +142,7 @@ public class Client extends Utilisateur implements Operations{
             pstmt.setString(1, getName());
             pstmt.setString(2, getLastN());
             pstmt.setString(3, getGender());
-            pstmt.setInt(4, getPhoneNumber());
+            pstmt.setString(4, getPhoneNumber());
             pstmt.setString(5, getEmail());
             pstmt.setString(6, getAddress());
             pstmt.setInt(7, getId());

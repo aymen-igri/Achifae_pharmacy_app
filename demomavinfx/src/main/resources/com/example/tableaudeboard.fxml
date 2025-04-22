@@ -30,7 +30,7 @@
                </children>
             </AnchorPane>
             <TextFlow layoutX="586.0" layoutY="18.0" prefHeight="83.0" prefWidth="631.0" />
-            <Label fx:id="bienvenue" layoutX="237.0" layoutY="19.0" prefHeight="81.0" prefWidth="462.0" text="Bienvenue message">
+            <Label fx:id="bienvenue" layoutX="237.0" layoutY="19.0" prefHeight="81.0" prefWidth="1033.0" text="Bienvenue message">
                <font>
                   <Font name="Arial Bold" size="48.0" />
                </font>

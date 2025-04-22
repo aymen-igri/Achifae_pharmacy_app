@@ -62,7 +62,7 @@ public class Clients {
     private TableColumn<Client, String> sexe_c;
 
     @FXML
-    private TableColumn<Client, Integer> tele_c;
+    private TableColumn<Client, String> tele_c;
 
     @FXML
     private TableColumn<Client, String> email_c;
@@ -147,7 +147,7 @@ public class Clients {
         nom_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         pren_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLastN()));
         sexe_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGender()));
-        tele_c.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPhoneNumber()).asObject());
+        tele_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
         email_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         adresse_c.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
     }
@@ -187,7 +187,7 @@ public class Clients {
             boolean matchesNom = matchesString(client.getName(), searchNomField.getText());
             boolean matchesPrenom = matchesString(client.getLastN(), searchPrenomField.getText());
             boolean matchesSexe = matchesType(client.getGender(), typeComboBox.getValue());
-            boolean matchesTele = matchesNumber(client.getPhoneNumber(), searchTeleField.getText());
+            boolean matchesTele = matchesString(client.getPhoneNumber(), searchTeleField.getText());
             boolean matchesEmail = matchesString(client.getEmail(), searchEmailField.getText());
             boolean matchesAdresse = matchesString(client.getAddress(), searchAdresseField.getText());
             

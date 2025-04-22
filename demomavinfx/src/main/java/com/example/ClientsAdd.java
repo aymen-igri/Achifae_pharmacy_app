@@ -31,7 +31,7 @@ public class ClientsAdd {
     private String nom;
     private String prenom;
     private String sexe;
-    private int tele;
+    private String tele;
     private String email;
     private String adresse;
 
@@ -106,7 +106,7 @@ public class ClientsAdd {
                     nom = nomcli.getText();
                     prenom = prencli.getText();
                     sexe = typeComboBox.getValue();
-                    tele = Integer.parseInt(telecli.getText());
+                    tele = telecli.getText();
                     email = emailcli.getText();
                     adresse = adressecli.getText();
     

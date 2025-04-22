@@ -69,7 +69,7 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="typeComboBox" layoutX="310.0" layoutY="17.0" prefHeight="39.0" prefWidth="118.0" promptText="Sexe du client" styleClass="search_select" visibleRowCount="3" />
+            <ComboBox fx:id="typeComboBox" layoutX="303.0" layoutY="17.0" prefHeight="39.0" prefWidth="125.0" promptText="Genre du client" styleClass="search_select" visibleRowCount="3" />
             <TableView fx:id="cliTable" layoutX="44.0" layoutY="72.0" prefHeight="462.0" prefWidth="1008.0" styleClass="table-view">
                <columns>
                   <TableColumn fx:id="id_c" prefWidth="70.66670227050781" text="ID" />
@@ -81,7 +81,7 @@
                   <TableColumn fx:id="adresse_c" minWidth="0.0" prefWidth="237.33331298828125" text="ADRESSE" />
                </columns>
             </TableView>
-            <TextField fx:id="searchPrenomField" layoutX="172.0" layoutY="17.0" prefHeight="39.0" prefWidth="120.0" promptText="Prenom du client" styleClass="search_text">
+            <TextField fx:id="searchPrenomField" layoutX="167.0" layoutY="17.0" prefHeight="39.0" prefWidth="120.0" promptText="Prenom du client" styleClass="search_text">
                <font>
                   <Font size="14.0" />
                </font>

@@ -119,7 +119,7 @@ public class ClientsUpdate {
                 try{
                     cli.setName(nomCli.getText());
                     cli.setLastN(prenCli.getText());
-                    cli.setPhoneNumber(Integer.parseInt(teleCli.getText()));
+                    cli.setPhoneNumber(teleCli.getText());
                     cli.setEmail(emailCli.getText());
                     cli.setAddress(adresseCli.getText());
                     cli.setGender(typeComboBox.getValue());

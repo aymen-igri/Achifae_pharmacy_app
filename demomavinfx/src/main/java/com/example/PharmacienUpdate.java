@@ -81,7 +81,7 @@ public class PharmacienUpdate {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        typeComboBox.setItems(FXCollections.observableArrayList("Admin","CDI","Stagere"));
+        typeComboBox.setItems(FXCollections.observableArrayList("Admin","CDI","Stagere","Ex-pharmacien"));
     }
 
     public void modifierPh(ActionEvent event){
