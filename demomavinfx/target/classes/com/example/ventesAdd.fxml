@@ -16,9 +16,10 @@
       </Text>
       <TextField fx:id="idCli" layoutX="55.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Id du client" styleClass="add_text" />
       <TextField fx:id="quantité" layoutX="55.0" layoutY="102.0" prefHeight="25.0" prefWidth="126.0" promptText="Qantité" styleClass="add_text" />
-      <TextField fx:id="prix" layoutX="190.0" layoutY="102.0" prefHeight="25.0" prefWidth="126.0" promptText="Prix" styleClass="add_text" />
+      <TextField fx:id="prix" layoutX="190.0" layoutY="102.0" prefHeight="25.0" prefWidth="93.0" promptText="Prix" styleClass="add_text" />
       <DatePicker fx:id="dateVen" layoutX="55.0" layoutY="153.0" prefHeight="25.0" prefWidth="261.0" promptText="Date de vente" styleClass="add_date" />
       <Button layoutX="156.0" layoutY="200.0" mnemonicParsing="false" onAction="#ajouterVen" styleClass="add_button" text="Addition" />
       <TextField fx:id="idMed" layoutX="189.0" layoutY="51.0" prefHeight="25.0" prefWidth="126.0" promptText="Id du medicament" styleClass="add_text" />
+      <Text fill="WHITE" layoutX="287.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DHS" wrappingWidth="28.13671875" />
    </children>
 </AnchorPane>

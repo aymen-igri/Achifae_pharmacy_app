@@ -52,7 +52,7 @@
                 <TableColumn fx:id="id_c" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="nom_c" prefWidth="250.0" text="NOM" />
                 <TableColumn fx:id="quantite_c" prefWidth="100.0" text="QUANTITÉ" />
-                <TableColumn fx:id="prix_c" prefWidth="75.0" text="PRIX" />
+                <TableColumn fx:id="prix_c" prefWidth="75.0" text="PRIX(DHS)" />
                 <TableColumn fx:id="dateexp_c" prefWidth="150.0" text="DATE D'EXPIRATION" />
                 <TableColumn fx:id="fourniceur_c" prefWidth="205.0" text="FOURNICEUR" />
                 <TableColumn fx:id="type_c" prefWidth="150.0" text="TYPE" />
