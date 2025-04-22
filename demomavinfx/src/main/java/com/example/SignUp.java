@@ -89,7 +89,7 @@ public class SignUp {
         lastnValue= nomph.getText();
         nameValue = prenph.getText();
         genderValue = gender.getValue();
-        roleValue = "Stagiere";
+        roleValue = "Stagiaire";
         contValue = tele.getText();
         usernameValue = username.getText();
         passwordValue = password.getText();
