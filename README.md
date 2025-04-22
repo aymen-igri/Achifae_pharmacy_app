@@ -12,9 +12,9 @@ What are we waiting for, let's start.
 
 
 # Table of Contents
-- [What is "ACHIFAA PHARMACY" application](#What-is-"ACHIFAA-PHARMACY"-application)
+- [What is "ACHIFAA PHARMACY" application](#what-is-achifaa-pharmacy-application)
 - [Database Tables and Classes](#database-tables-and-classes)
-- [How to Use the Application](#how-to-use-the-application)
+- [How can i use this application?](#how-can-i-use-this-application)
 
 
 
